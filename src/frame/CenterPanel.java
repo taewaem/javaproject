@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CenterPanel extends JPanel {
-    private CardLayout layout;
+    private CardLayout cardLayout;
     private JPanel cardPanel;
 
     public CenterPanel(CaloriePanel caloriePanel) {
-        layout = new CardLayout();
-        cardPanel = new JPanel(layout);
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
 
         cardPanel.add(new DietPanel(caloriePanel), "diet");
         cardPanel.add(new ExercisePanel(caloriePanel), "exercise");
@@ -22,6 +22,6 @@ public class CenterPanel extends JPanel {
     }
 
     public void showPanel(String name) {
-        layout.show(cardPanel, name);
+        cardLayout.show(cardPanel, name);
     }
 }

@@ -8,6 +8,7 @@ public class MainPanel extends JFrame {
         setTitle("NutriLog");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
+        setBackground(new Color(34,139,34));
         setLayout(new BorderLayout());
 
 

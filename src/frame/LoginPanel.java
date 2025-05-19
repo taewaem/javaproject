@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class LoginPanel extends JPanel{		//JPanel 상속으로 바꾸기
+public class LoginPanel extends JPanel{
 
     private JLabel titleLabel;
 	private JTextField idField;
@@ -51,13 +51,15 @@ public class LoginPanel extends JPanel{		//JPanel 상속으로 바꾸기
             });
         add(idField);
 
-        pwField = new JPasswordField("0000");
+        pwField = new JPasswordField();
         pwField.setForeground(Color.GRAY);
         pwField.setBackground(Color.WHITE);
         pwField.setBorder(null);
+        pwField.setEchoChar((char) 0);
+        pwField.setText("PW");
         pwField.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
-                if (String.valueOf(pwField.getPassword()).equals("0000")) {
+                if (String.valueOf(pwField.getPassword()).equals("PW")) {
                     pwField.setText("");
                     pwField.setForeground(Color.BLACK);
                     pwField.setEchoChar('•'); // 입력 시 비밀번호 표시
@@ -66,12 +68,13 @@ public class LoginPanel extends JPanel{		//JPanel 상속으로 바꾸기
 
             public void focusLost(FocusEvent e) {
                 if (String.valueOf(pwField.getPassword()).isEmpty()) {
-                    pwField.setText("0000");
+                    pwField.setText("PW");
                     pwField.setForeground(Color.GRAY);
                     pwField.setEchoChar((char) 0); // 다시 평문으로
                 }
             }
         });
+        pwField.addActionListener(e -> login());
         add(pwField);
 
         loginBtn = new JButton("Login");
@@ -125,7 +128,7 @@ public class LoginPanel extends JPanel{		//JPanel 상속으로 바꾸기
 
         // 간단한 예제 로그인 조건 (아이디: user / 비번: 1234)
         if (id.equals("user") && pw.equals("1234")) {
-            JOptionPane.showMessageDialog(this, "로그인 성공!");
+            JOptionPane.showMessageDialog(this, id+"님, 환영합니다!");
             SwingUtilities.getWindowAncestor(this).dispose();
             new MainPanel(); // 메인 패널 열기
         } else {

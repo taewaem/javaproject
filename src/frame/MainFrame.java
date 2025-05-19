@@ -5,7 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MainFrame extends JFrame {//꾸미기
-
+    //Main을 실행하면 처음 나오는 화면
+    
     private JPanel contentPane;
     private JPanel cardPanel;
     private CardLayout cardLayout;
@@ -20,11 +21,6 @@ public class MainFrame extends JFrame {//꾸미기
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setSize(500, 300);
 	    setLocationRelativeTo(null);  // 가운데 정렬
-		
-        //배경색 커스텀
-        // contentPane = new JPanel(new BorderLayout());
-        // contentPane.setBackground(new Color(34,139,34));
-        // setContentPane(contentPane);
 
 	    cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
@@ -50,7 +46,7 @@ public class MainFrame extends JFrame {//꾸미기
                 int titleY = y - titleHeight + 50;
 
                 titleLabel.setBounds(titleX, titleY, titleWidth, titleHeight);
-                loginBtn.setBounds(centerX, y + 100, fieldWidth, fieldHeight);
+                loginBtn.setBounds(centerX, y + 50, fieldWidth, fieldHeight);
             }
             
         };
