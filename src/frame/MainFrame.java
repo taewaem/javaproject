@@ -4,10 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+//실행했을 때 열리는 창(제목+로그인+회원가입)
 public class MainFrame extends JFrame {//꾸미기
 
+    private JLabel titleLabel;
     private JPanel cardPanel;
     private CardLayout cardLayout;
+    private JButton loginBtn;
 
 	public MainFrame() {
 		
@@ -16,11 +19,20 @@ public class MainFrame extends JFrame {//꾸미기
 	    setSize(500, 300);
 	    setLocationRelativeTo(null);  // 가운데 정렬
 		
+        titleLabel = new JLabel("NutriLog", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Bauhaus 93",Font.PLAIN,50));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);;
+        add(titleLabel);
+
 	    cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
+
         JPanel loginButtonPanel = new JPanel(new GridBagLayout());
-        JButton loginBtn = new JButton("LOGIN");
+        loginButtonPanel.setBackground(new Color(34,139,34));
+
+        loginBtn = new JButton("LOGIN");
         loginBtn.setPreferredSize(new Dimension(120,40));
         loginBtn.addActionListener(e -> showLoginPanel());
         loginButtonPanel.add(loginBtn);
@@ -33,6 +45,27 @@ public class MainFrame extends JFrame {//꾸미기
 		setVisible(true);
 	}
 	
+    @Override
+    public void doLayout() {
+        // 패널의 너비와 높이
+        int panelWidth = getWidth();
+        int y = 100;  // 시작 y 위치
+        int fieldWidth = 200;
+        int fieldHeight = 30;
+
+        // 가운데 정렬된 x 좌표 계산
+        int centerX = (panelWidth - fieldWidth) / 2;
+
+        FontMetrics fm = titleLabel.getFontMetrics(titleLabel.getFont());
+        int titleWidth = fm.stringWidth(titleLabel.getText());
+        int titleHeight = fm.getHeight();
+        int titleX = (panelWidth - titleWidth) / 2;
+        int titleY = y - titleHeight - 10;
+
+        titleLabel.setBounds(titleX, titleY, titleWidth, titleHeight);
+        loginBtn.setBounds(centerX, y + 100, fieldWidth, fieldHeight);
+    }
+
     private void showLoginPanel() {
         cardLayout.show(cardPanel, "loginPanel");
     }
