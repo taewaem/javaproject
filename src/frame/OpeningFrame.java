@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MainFrame extends JFrame {//꾸미기
+public class OpeningFrame extends JFrame {//꾸미기
     //Main을 실행하면 처음 나오는 화면
     
     private JPanel contentPane;
@@ -15,7 +15,7 @@ public class MainFrame extends JFrame {//꾸미기
     private JButton loginBtn;
     private JPanel btnCenterPanel;
 
-	public MainFrame() {
+	public OpeningFrame() {
 		
 		setTitle("NutriLog");
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

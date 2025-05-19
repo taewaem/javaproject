@@ -8,6 +8,8 @@ public class CenterPanel extends JPanel {
     private JPanel cardPanel;
 
     public CenterPanel(CaloriePanel caloriePanel) {
+        setLayout(null);
+        
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
