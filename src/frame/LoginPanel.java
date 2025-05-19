@@ -27,7 +27,7 @@ public class LoginPanel extends JPanel{		//JPanel 상속으로 바꾸기
         titleLabel = new JLabel("NutriLog");
         titleLabel.setFont(new Font("Bauhaus 93",Font.PLAIN,50));
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(200, 30, 500, 200);
+        //titleLabel.setBounds(200, 30, 500, 200);
         add(titleLabel);
 
         idField = new JTextField("ID");
@@ -80,14 +80,14 @@ public class LoginPanel extends JPanel{		//JPanel 상속으로 바꾸기
         loginBtn.setFont(new Font("Bauhaus 93",Font.BOLD, 14));
         loginBtn.setFocusPainted(false);
         loginBtn.setBorderPainted(false);
-        loginBtn.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e){
-                loginBtn.setBackground(Color.GRAY);
-            }
-            public void mouseReleased(MouseEvent e){
-                loginBtn.setBackground(Color.WHITE);
-            }
-        });
+        // loginBtn.addMouseListener(new MouseAdapter() {
+        //     public void mousePressed(MouseEvent e){
+        //         loginBtn.setBackground(Color.GRAY);
+        //     }
+        //     public void mouseReleased(MouseEvent e){
+        //         loginBtn.setBackground(Color.WHITE);
+        //     }
+        // });
         loginBtn.addActionListener(e -> login());
         add(loginBtn);
     }
