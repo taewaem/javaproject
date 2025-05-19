@@ -173,7 +173,7 @@ public class Board_Main extends JPanel {
 			if (selected != null) {
 				int postNo = selected.getPostNo(); // 실제 게시글 번호
 				board.deletePost(postNo); // 정확한 게시글 삭제
-				board.saveToFile("board.txt"); // 변경사항 저장
+				board.saveToFile("board.dat"); // 변경사항 저장
 				JOptionPane.showMessageDialog(this, "게시글이 삭제되었습니다.");
 			} else {
 				JOptionPane.showMessageDialog(this, "게시글을 선택해주세요.");
@@ -206,7 +206,7 @@ public class Board_Main extends JPanel {
 
 	public static void main(String[] args) {
 		Board board = new Board(); // 게시글 관리 객체 생성
-		board.loadFromFile("board.txt"); // 파일에서 게시글 불러오기
+		board.loadFromFile("board.dat"); // 파일에서 게시글 불러오기
 		// new Board_Main(board); // 메인 프레임 실행
 
 		JFrame frame = new JFrame("게시판 메인 메뉴");
