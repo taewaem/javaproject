@@ -54,7 +54,9 @@ public class ProductPanel extends JPanel {
         descriptionLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 
         // 가격
-        JLabel priceLabel = new JLabel(product.getPrice() + "원");
+        int price = product.getPrice();
+        String formatPrice = MainFrame.df.format(price);
+        JLabel priceLabel = new JLabel(formatPrice + "원");
         priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
         priceLabel.setForeground(new Color(108, 0, 255));
 
@@ -94,8 +96,42 @@ public class ProductPanel extends JPanel {
             cart.addProduct(product, quantity);
             System.out.println(quantity + "개 " + product.getName() + " 장바구니에 추가");
 
-            //장바구니 패널 이동( 삭제할 것 따로 장바구니 버튼 존재)
-            utilPanel.goToPage(new CartPanel(cart));
+            Font defaultMessageFont = UIManager.getFont("OptionPane.messageFont");
+            Font defaultButtonFont = UIManager.getFont("OptionPane.buttonFont");
+            Color defaultOptionPaneBg = UIManager.getColor("OptionPane.background");
+            Color defaultPanelBg = UIManager.getColor("Panel.background");
+            Color defaultButtonBg = UIManager.getColor("Button.background");
+
+            // 장바구니 이동 여부
+            try {
+                UIManager.put("OptionPane.messageFont", new Font("맑은 고딕", Font.PLAIN, 16));
+                UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕", Font.BOLD, 14));
+                UIManager.put("OptionPane.background", new Color(255, 255, 255));
+                UIManager.put("Panel.background", new Color(255, 255, 255));
+                UIManager.put("Button.background", new Color(240, 240, 240));
+
+                // 다이얼로그 출력
+                int result = JOptionPane.showConfirmDialog(
+                        null,
+                        "장바구니로 이동하시겠습니까?",
+                        "장바구니 이동",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                );
+
+                if (result == JOptionPane.YES_OPTION) {
+                    utilPanel.goToPage(new CartPanel(cart));
+                }
+
+            } finally {
+                // 기존 UIManager 설정 복원 (다른 화면 영향 방지)
+                UIManager.put("OptionPane.messageFont", defaultMessageFont);
+                UIManager.put("OptionPane.buttonFont", defaultButtonFont);
+                UIManager.put("OptionPane.background", defaultOptionPaneBg);
+                UIManager.put("Panel.background", defaultPanelBg);
+                UIManager.put("Button.background", defaultButtonBg);
+            }
+
         });
 
         //이전 버튼 클릭 시

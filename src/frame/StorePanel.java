@@ -79,7 +79,9 @@ public class StorePanel extends JPanel{
                 label.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 
                 //가격 라벨 생성
-                JLabel priceLabel = new JLabel(String.valueOf(product.getPrice()) + "원", SwingConstants.LEFT);
+                int price = product.getPrice();
+                String formatPrice = MainFrame.df.format(price);
+                JLabel priceLabel = new JLabel(formatPrice + "원", SwingConstants.LEFT);
                 priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
                 priceLabel.setForeground(new Color(108, 0, 255));
 

@@ -5,12 +5,19 @@ import cart.Cart;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.Stack;
 
 public class MainFrame extends JFrame {
 
+    // 화면 전환을 위한 패널 스택
     public static Stack<JPanel> pageStack = new Stack<>();
+
+    // 메인 프레임에 접근하기 위한 전역 변수
     public static JFrame mainFrame;
+
+    public static DecimalFormat df = new DecimalFormat("###,###");
+
     private Cart cart = new Cart();
     public MainFrame() {
 
@@ -35,8 +42,11 @@ public class MainFrame extends JFrame {
 //            }
 //        };
 //        addWindowListener(windowListener);
-
-
+        /**
+         * 메인 프레임에서 추가될 패널들
+         * 상점 패널
+         *.....
+         */
         JPanel storePanel = new StorePanel();
         mainFrame.add(storePanel);
 

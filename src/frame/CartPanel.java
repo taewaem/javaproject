@@ -104,11 +104,15 @@ public class CartPanel extends JPanel {
             JLabel nameLabel = new JLabel(item.getProduct().getName());
             nameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 
-            JLabel priceLabel = new JLabel((item.getProduct().getPrice()) + "원" );
+            int price = item.getProduct().getPrice();
+            String formatPrice = MainFrame.df.format(price);
+            JLabel priceLabel = new JLabel(formatPrice + "원" );
             priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
             priceLabel.setForeground(new Color(108, 0, 255));
 
-            JLabel totalPriceLabel = new JLabel("총 금액: " + (item.getProduct().getPrice() * item.getQuantity()) + "원");
+            int totalPrice = item.getProduct().getPrice() * item.getQuantity();
+            String formatTotalPrice = MainFrame.df.format(totalPrice);
+            JLabel totalPriceLabel = new JLabel("총 금액: " + formatTotalPrice  + "원");
             totalPriceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
             totalPriceLabel.setForeground(new Color(108, 0, 255));
 
@@ -159,7 +163,9 @@ public class CartPanel extends JPanel {
             itemPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
-        totalLabel.setText("총 금액: ₩" + cart.getTotalPrice());
+        int cartTotalPrice = cart.getTotalPrice();
+        String formatCartTotalPrice = MainFrame.df.format(cartTotalPrice);
+        totalLabel.setText("총 금액: " + formatCartTotalPrice + "원");
 
         revalidate();
         repaint();
