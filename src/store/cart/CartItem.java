@@ -1,6 +1,6 @@
-package cart;
+package store.cart;
 
-import product.Product;
+import store.product.Product;
 
 public class CartItem {
 

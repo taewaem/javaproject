@@ -1,7 +1,7 @@
 package frame;
 
 
-import cart.Cart;
+import store.cart.Cart;
 
 import javax.swing.*;
 import java.awt.*;

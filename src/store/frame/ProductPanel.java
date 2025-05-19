@@ -1,7 +1,7 @@
 package frame;
 
-import cart.Cart;
-import product.Product;
+import store.cart.Cart;
+import store.product.Product;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +25,7 @@ public class ProductPanel extends JPanel {
 
         // 왼쪽: 이미지패널
         JLabel imageLabel = new JLabel();
-        URL imageUrl = getClass().getResource("/image/" + product.getName() + ".png");
+        URL imageUrl = getClass().getResource("/store/image/" + product.getName() + ".png");
         if (imageUrl != null) {
             ImageIcon img = new ImageIcon(imageUrl);
             Image scaled = img.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
