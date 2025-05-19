@@ -8,8 +8,7 @@ import java.awt.event.*;
 public class MainFrame extends JFrame {//꾸미기
 
     private JLabel titleLabel;
-    private JPanel cardPanel;
-    private CardLayout cardLayout;
+    private JPanel mainPanel;
     private JButton loginBtn;
 
 	public MainFrame() {
@@ -18,15 +17,15 @@ public class MainFrame extends JFrame {//꾸미기
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setSize(500, 300);
 	    setLocationRelativeTo(null);  // 가운데 정렬
+
+        mainPanel = new JPanel();
+        mainPanel.setBackground(new Color(34, 139, 34));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));    //수직 박스 레이아웃
 		
         titleLabel = new JLabel("NutriLog", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Bauhaus 93",Font.PLAIN,50));
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);;
-        add(titleLabel);
-
-	    cardLayout = new CardLayout();
-        cardPanel = new JPanel(cardLayout);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);   //중앙 정렬렬
 
 
         JPanel loginButtonPanel = new JPanel(new GridBagLayout());
