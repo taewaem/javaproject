@@ -45,7 +45,6 @@ public class Board_Main extends JPanel {
 		// 창을 화면에 보이게 함
 		// setVisible(true);
 	}
-
 	// 1. 게시글 목록 보기 (목록 창 열기)
 	private void showPostList() {
 		JDialog dialog = new JDialog(parentFrame, "게시글 목록", true);
@@ -78,7 +77,6 @@ public class Board_Main extends JPanel {
 		}
 		dialog.setVisible(true); // 창 표시
 	}
-
 	// 2. 게시글 작성 또는 수정 공통 다이얼로그
 	// post가 null이면 '작성'이고, post가 있으면 '수정'
 	private void openPostDialog(Board.Post post) {
@@ -130,7 +128,6 @@ public class Board_Main extends JPanel {
 
 		dialog.setVisible(true);
 	}
-
 	// 3. 게시글 수정: 게시글을 선택 후 수정 창으로 이동
 	// 게시글 리스트를 보여주고, 선택한 게시글을 openPostDialog()에 넘겨 수정 화면을 연다
 	private void openEditDialog() {
@@ -157,7 +154,6 @@ public class Board_Main extends JPanel {
 			}
 		}
 	}
-
 	// 4. 게시글 삭제: 게시글 선택 후 삭제
 	private void openDeleteDialog() {
 		DefaultListModel<Board.Post> listModel = board.getPostListModel();
@@ -180,7 +176,6 @@ public class Board_Main extends JPanel {
 			}
 		}
 	}
-
 	// 게시글 상세보기 창
 	private void openViewDialog(Board.Post post) {
 		JDialog viewDialog = new JDialog(parentFrame, "게시글 보기", true);
@@ -203,7 +198,6 @@ public class Board_Main extends JPanel {
 
 		viewDialog.setVisible(true);
 	}
-
 	public static void main(String[] args) {
 		Board board = new Board(); // 게시글 관리 객체 생성
 		board.loadFromFile("board.dat"); // 파일에서 게시글 불러오기

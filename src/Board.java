@@ -21,12 +21,10 @@ public class Board {
 	public void addPost(String title, String content) {
 		posts.add(new Post(postNoCounter++, title, content));
 	}
-
 	// [기능] 특정 게시글 가져오기
 	public Post getPost(int postNo) {
 		return posts.stream().filter(p -> p.getPostNo() == postNo).findFirst().orElse(null);
 	}
-
 	// [기능] 게시글 수정
 	public void updatePost(int postNo, String newTitle, String newContent) {
 		Post post = getPost(postNo);
@@ -35,7 +33,6 @@ public class Board {
 			post.setContent(newContent);
 		}
 	}
-
 	// [기능] 게시글 삭제
 	public void deletePost(int postNo) {
 		// 게시글 삭제
@@ -52,11 +49,9 @@ public class Board {
 		// 다음 번호 초기화
 		postNoCounter = posts.size() + 1;
 	}
-
 	public ArrayList<Post> getAllPosts() {
 		return posts;
 	}
-
 	// [기능] 게시글을 JList와 같은 GUI에 보여주기 위한 모델 형태로 반환
 	public DefaultListModel<Post> getPostListModel() {
 		DefaultListModel<Post> model = new DefaultListModel<>();
@@ -65,7 +60,6 @@ public class Board {
 		}
 		return model;
 	}
-
 	// [기능] 게시글 목록과 번호 정보를 파일에 저장
 	public void saveToFile(String filename) {
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
@@ -75,7 +69,6 @@ public class Board {
 			e.printStackTrace(); // 저장 실패 시 오류 출력
 		}
 	}
-
 	// [기능] 저장된 파일로부터 게시글 목록과 번호 상태 불러오기
 	@SuppressWarnings("unchecked")
 	public void loadFromFile(String filename) {
@@ -86,7 +79,6 @@ public class Board {
 			System.out.println("저장된 파일이 없거나 불러오기에 실패했습니다.");
 		}
 	}
-
 //--------------------------------------------------------------------------------
 // 내부 Post 클래스 : 게시글 객체 정의
 	public static class Post implements Serializable {
@@ -102,48 +94,38 @@ public class Board {
 			this.exerKcal = exerKcal;
 			this.foodKcal = foodKcal;
 		}
-
-		// 생성자: 게시글 번호, 제목, 내용 입력받아 초기화
+		// 생성자 : 게시글 번호, 제목, 내용 입력받아 초기화
 		public Post(int postNo, String title, String content) {
 			this.postNo = postNo;
 			this.title = title;
 			this.content = content;
 		}
-
 		// getter, setter 메서드들
 		public int getPostNo() {
 			return postNo;
 		}
-
 		public void setPostNo(int postNo) {
 			this.postNo = postNo;
 		}
-
 		public String getTitle() {
 			return title;
 		}
-
 		public void setTitle(String title) {
 			this.title = title;
 		}
-
 		public String getContent() {
 			return content;
 		}
-
 		public void setContent(String content) {
 			this.content = content;
 		}
-
 		public double getExerKcal() {
 			return exerKcal;
 		}
-
 		public double getFoodKcal() {
 			return foodKcal;
 		}
-
-		// 리스트에서 보이게 될 문자열 형태
+		// 리스트에서 보이게 될 문자열 형태 
 		@Override
 		public String toString() {
 			return postNo + ". " + title;
