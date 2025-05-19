@@ -1,5 +1,4 @@
-package frame;
-
+package store.frame;
 
 import store.cart.Cart;
 
