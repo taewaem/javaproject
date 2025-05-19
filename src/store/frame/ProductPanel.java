@@ -1,6 +1,8 @@
 package frame;
 
 import store.cart.Cart;
+import store.frame.CartPanel;
+import store.frame.UtilPanel;
 import store.product.Product;
 
 import javax.swing.*;
@@ -55,7 +57,7 @@ public class ProductPanel extends JPanel {
 
         // 가격
         int price = product.getPrice();
-        String formatPrice = MainFrame.df.format(price);
+        String formatPrice = frame.MainFrame.df.format(price);
         JLabel priceLabel = new JLabel(formatPrice + "원");
         priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
         priceLabel.setForeground(new Color(108, 0, 255));

@@ -1,5 +1,6 @@
 package frame;
 
+import store.frame.UtilPanel;
 import store.product.Product;
 import store.product.ProductService;
 
@@ -80,7 +81,7 @@ public class StorePanel extends JPanel{
 
                 //가격 라벨 생성
                 int price = product.getPrice();
-                String formatPrice = MainFrame.df.format(price);
+                String formatPrice = frame.MainFrame.df.format(price);
                 JLabel priceLabel = new JLabel(formatPrice + "원", SwingConstants.LEFT);
                 priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
                 priceLabel.setForeground(new Color(108, 0, 255));
@@ -131,7 +132,7 @@ public class StorePanel extends JPanel{
             else {
                 System.out.println(p.getName() + " page");
 
-                utilPanel.goToPage(new ProductPanel(p));    //ProductPanel로 이동
+                utilPanel.goToPage(new frame.ProductPanel(p));    //ProductPanel로 이동
             }
         }
     }
