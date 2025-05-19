@@ -1,4 +1,4 @@
-package frame;
+package store.frame;
 
 import store.cart.Cart;
 import store.cart.CartItem;
@@ -86,7 +86,7 @@ public class CartPanel extends JPanel {
 
             // 왼쪽: 이미지
             JLabel imageLabel = new JLabel();
-            URL imageUrl = getClass().getResource("/image/" + item.getProduct().getName() + ".png");
+            URL imageUrl = getClass().getResource("/store/image/" + item.getProduct().getName() + ".png");
             if (imageUrl != null) {
                 imageLabel.setPreferredSize(new Dimension(100, 100));
                 ImageIcon img = new ImageIcon(imageUrl);
@@ -105,13 +105,13 @@ public class CartPanel extends JPanel {
             nameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 
             int price = item.getProduct().getPrice();
-            String formatPrice = MainFrame.df.format(price);
+            String formatPrice = frame.MainFrame.df.format(price);
             JLabel priceLabel = new JLabel(formatPrice + "원" );
             priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
             priceLabel.setForeground(new Color(108, 0, 255));
 
             int totalPrice = item.getProduct().getPrice() * item.getQuantity();
-            String formatTotalPrice = MainFrame.df.format(totalPrice);
+            String formatTotalPrice = frame.MainFrame.df.format(totalPrice);
             JLabel totalPriceLabel = new JLabel("총 금액: " + formatTotalPrice  + "원");
             totalPriceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
             totalPriceLabel.setForeground(new Color(108, 0, 255));
@@ -164,7 +164,7 @@ public class CartPanel extends JPanel {
         }
 
         int cartTotalPrice = cart.getTotalPrice();
-        String formatCartTotalPrice = MainFrame.df.format(cartTotalPrice);
+        String formatCartTotalPrice = frame.MainFrame.df.format(cartTotalPrice);
         totalLabel.setText("총 금액: " + formatCartTotalPrice + "원");
 
         revalidate();
