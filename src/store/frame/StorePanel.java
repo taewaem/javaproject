@@ -1,7 +1,7 @@
 package frame;
 
-import product.Product;
-import product.ProductService;
+import store.product.Product;
+import store.product.ProductService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +62,7 @@ public class StorePanel extends JPanel{
             sp.setSize(new Dimension(170, 170));
 
             //이미지 불러오기
-            URL imageUrl = getClass().getResource("/image/" + product.getName() + ".png");
+            URL imageUrl = getClass().getResource("/store/image/" + product.getName() + ".png");
             if (imageUrl != null) {
                 ImageIcon img = new ImageIcon(imageUrl);
                 Image scaled = img.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);

@@ -1,4 +1,4 @@
-package product;
+package store.product;
 
 import java.util.List;
 
