@@ -20,7 +20,7 @@ public class StorePanel extends JPanel {
     public StorePanel() {
 
         setLayout(new BorderLayout());
-        setBackground(new Color(255, 255, 255)); 
+        setBackground(new Color(255, 255, 255));
 //        // 타이틀
 //        JLabel title = new JLabel("영양제 상점", SwingConstants.CENTER);
 //        title.setFont(new Font("NanumSquareRound", Font.BOLD, 28)); // 귀여운 둥근 폰트
@@ -34,7 +34,7 @@ public class StorePanel extends JPanel {
         centerPanel.setOpaque(false); // 투명하게
         add(centerPanel, BorderLayout.CENTER);
 
-        JLabel productLabel = new JLabel("🛒 영양제 목록");
+        JLabel productLabel = new JLabel("🛒 영양제 목록 🛒");
         productLabel.setFont(new Font("NanumSquareRound", Font.BOLD, 18));
         productLabel.setForeground(new Color(110, 50, 220)); // 진한 보라
         productLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
