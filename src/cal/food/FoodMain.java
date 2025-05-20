@@ -48,7 +48,7 @@ public class FoodMain extends JFrame implements ActionListener
     JTextField foodAmountField;
     
     //다른 메소드가 이용할 수 있게 멤버변수로 선언한 JLabel
-    JLabel outputFoodLabel;
+    JLabel outputFoodLabel, selectedFoodLabel;
     
     //값을 입력하는 버튼의 텍스트와 현재 값을 입력받는 상태인지 점검하는 boolean변수
     String inputButtonText="입력";
