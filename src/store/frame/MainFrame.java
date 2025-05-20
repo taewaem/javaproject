@@ -1,5 +1,7 @@
 package store.frame;
 
+import cal.exercise.ExercisePanel;
+import cal.food.FoodPanel;
 import check.CheckPanel;
 import store.cart.Cart;
 
@@ -49,9 +51,13 @@ public class MainFrame extends JFrame {
          */
         JPanel storePanel = new StorePanel();
         JPanel checkPanel = new CheckPanel();
+        JPanel exercisePanel = new ExercisePanel();
+        JPanel foodPanel = new FoodPanel();
 
-//        mainFrame.add(checkPanel);
-        mainFrame.add(storePanel);
+        mainFrame.add(checkPanel);
+//        mainFrame.add(storePanel);
+//        mainFrame.add(exercisePanel);
+//        mainFrame.add(foodPanel);
 
         mainFrame.setVisible(true);
     }

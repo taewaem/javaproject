@@ -159,6 +159,7 @@ public class ProductPanel extends JPanel {
 
         add(infoPanel, BorderLayout.CENTER);
 
+
         // 버튼 기능
         cartButton.addActionListener(e -> {
             int quantity = (Integer) quantitySpinner.getValue();
