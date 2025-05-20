@@ -1,4 +1,4 @@
-package frame;
+package UI.frame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +17,8 @@ public class MainFrame extends JFrame {
         setSize(800, 600);
         setLayout(new BorderLayout());
 
-
-        // 칼로리 영역
-        CaloriePanel caloriePanel = new CaloriePanel();
-        caloriePanel.setBackground(themeColor);
-
         // 내용 화면 영역
-        CenterPanel centerPanel = new CenterPanel(caloriePanel);
+        CenterPanel centerPanel = new CenterPanel();
         centerPanel.setBackground(themeColor);
 
         // 상단 고정 영역
@@ -34,7 +29,6 @@ public class MainFrame extends JFrame {
         // CENTER에 칼로리 + centerPanel 내용 합쳐서 넣기
         JPanel mainContent = new JPanel(new BorderLayout());
         mainContent.setBackground(themeColor);
-        mainContent.add(caloriePanel, BorderLayout.NORTH);
         mainContent.add(centerPanel, BorderLayout.CENTER);
         add(mainContent, BorderLayout.CENTER);
 

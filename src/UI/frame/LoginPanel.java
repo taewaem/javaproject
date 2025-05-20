@@ -1,4 +1,4 @@
-package frame;
+package UI.frame;
 
 import java.awt.*;
 import java.awt.event.*;

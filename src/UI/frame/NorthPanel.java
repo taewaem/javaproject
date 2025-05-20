@@ -1,4 +1,4 @@
-package frame;
+package UI.frame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +25,7 @@ public class NorthPanel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                centerPanel.showPanel("main");
+                centerPanel.showPanel("menu");
             }
             
         });
