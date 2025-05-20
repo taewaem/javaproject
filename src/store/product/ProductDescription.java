@@ -13,6 +13,8 @@ public class ProductDescription {
         this.caution = caution;
     }
 
+
+
     public String getSummary() { return summary; }
     public String getDetails() { return details; }
     public String getUsage() { return usage; }
