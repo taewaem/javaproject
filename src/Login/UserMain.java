@@ -2,54 +2,50 @@ package UserMain;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import User.User;
 
-public class UserMain extends JFrame {
+public class UserMain extends JPanel {
 
-    public UserMain() {
-        setTitle("로그인");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 200);
-        setLocationRelativeTo(null);
+    private JFrame frame; // 프레임 
 
+    public UserMain(JFrame frame) { 
+        this.frame = frame;
+        setLayout(new BorderLayout());
         showLoginPanel();
     }
 
-    private void showLoginPanel() {
-        getContentPane().removeAll();
+    private void showLoginPanel() {//로그인 패널
+        removeAll();
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2,10, 10));
+        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+        JTextField idField = new JTextField(); //아이디 입력
+        JPasswordField pwField = new JPasswordField(); //비번 입력 
 
-        JTextField idField = new JTextField();
-        JPasswordField pwField = new JPasswordField();
-
-        JButton loginBtn = new JButton("로그인");
-        Font font = new Font("맑은 고딕",Font.BOLD,15);
+        JButton loginBtn = new JButton("Login"); //버튼 
+        Font font = new Font("Bauhaus 93",Font.PLAIN,10);
         loginBtn.setFont(font);
-        JButton signupBtn = new JButton("회원가입");
-        JButton findBtn = new JButton("ID/PW 찾기");
+        JButton signupBtn = new JButton("SignUp");
+        signupBtn.setFont(font);
+        JButton findBtn = new JButton("ID/PW Found");
+        findBtn.setFont(font);
 
-        panel.add(new JLabel("\t아이디:"));
-        panel.add(idField);
-        panel.add(new JLabel("\t비밀번호:"));
+        panel.add(new JLabel("아이디:"));
+        panel.add(new JLabel("비밀번호:"));
         panel.add(pwField);
-
         panel.add(loginBtn);
         panel.add(signupBtn);
         panel.add(findBtn);
 
-        add(panel);
+        add(panel, BorderLayout.CENTER);
 
-        loginBtn.addActionListener(e -> {
+        loginBtn.addActionListener(e -> { //기능
             String id = idField.getText().trim();
             String pw = new String(pwField.getPassword());
 
             if (UserID.loginCheck(id, pw)) {
-                JOptionPane.showMessageDialog(this, "로그인에 성공하셨습니다.");
+                JOptionPane.showMessageDialog(frame, "로그인에 성공하셨습니다.");
             } else {
-                JOptionPane.showMessageDialog(this, "아이디 또는 비밀번호가 맞지 않습니다.");
+                JOptionPane.showMessageDialog(frame, "아이디 또는 비밀번호가 맞지 않습니다.");
             }
         });
 
@@ -61,7 +57,7 @@ public class UserMain extends JFrame {
     }
 
     private void showSignUpPanel() {
-        getContentPane().removeAll();
+        removeAll();
 
         JPanel panel = new JPanel(new GridLayout(7, 2, 5, 5));
 
@@ -90,7 +86,7 @@ public class UserMain extends JFrame {
         panel.add(submitBtn);
         panel.add(backBtn);
 
-        add(panel);
+        add(panel, BorderLayout.CENTER);
 
         submitBtn.addActionListener(e -> {
             String id = idField.getText().trim();
@@ -102,32 +98,32 @@ public class UserMain extends JFrame {
 
             if (id.isEmpty() || pw1.isEmpty() || pw2.isEmpty() || nickname.isEmpty() ||
                     birthday.isEmpty() || phone.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "모든 칸에 입력해주세요.");
+                JOptionPane.showMessageDialog(frame, "모든 칸에 입력해주세요.");
                 return;
             }
             if (!pw1.equals(pw2)) {
-                JOptionPane.showMessageDialog(this, "비밀번호가 일치하지 않습니다.");
+                JOptionPane.showMessageDialog(frame, "비밀번호가 일치하지 않습니다.");
                 return;
             }
             if (!UserID.checkid(id)) {
-                JOptionPane.showMessageDialog(this, "이미 존재하는 아이디입니다.");
+                JOptionPane.showMessageDialog(frame, "이미 존재하는 아이디입니다.");
                 return;
             }
             if (!UserID.checkname(nickname)) {
-                JOptionPane.showMessageDialog(this, "이미 존재하는 닉네임입니다.");
+                JOptionPane.showMessageDialog(frame, "이미 존재하는 닉네임입니다.");
                 return;
             }
             if (birthday.length() != 8) {
-                JOptionPane.showMessageDialog(this, "생년월일은 8자리 숫자여야 합니다.");
+                JOptionPane.showMessageDialog(frame, "생년월일은 8자리 숫자여야 합니다.");
                 return;
             }
             if (phone.length() != 11) {
-                JOptionPane.showMessageDialog(this, "올바른 전화번호를 입력해주세요.(예시 01047757921)");
+                JOptionPane.showMessageDialog(frame, "올바른 전화번호를 입력해주세요.(예시 01047757921)");
                 return;
             }
 
             UserID.save(new User(id, pw1, nickname, birthday, phone));
-            JOptionPane.showMessageDialog(this, nickname + "님 회원가입이 완료되었습니다.");
+            JOptionPane.showMessageDialog(frame, nickname + "님 회원가입이 완료되었습니다.");
             showLoginPanel();
         });
 
@@ -138,7 +134,7 @@ public class UserMain extends JFrame {
     }
 
     private void showFindPanel() {
-        getContentPane().removeAll();
+        removeAll();
 
         JPanel panel = new JPanel(new GridLayout(5, 1, 5, 5));
 
@@ -150,7 +146,7 @@ public class UserMain extends JFrame {
         panel.add(findPwBtn);
         panel.add(backBtn);
 
-        add(panel);
+        add(panel, BorderLayout.CENTER);
 
         findIdBtn.addActionListener(e -> showFindIdPanel());
         findPwBtn.addActionListener(e -> showFindPwPanel());
@@ -161,7 +157,7 @@ public class UserMain extends JFrame {
     }
 
     private void showFindIdPanel() {
-        getContentPane().removeAll();
+        removeAll();
 
         JPanel panel = new JPanel(new GridLayout(4, 2, 5, 5));
 
@@ -178,7 +174,7 @@ public class UserMain extends JFrame {
         panel.add(submitBtn);
         panel.add(backBtn);
 
-        add(panel);
+        add(panel, BorderLayout.CENTER);
 
         submitBtn.addActionListener(e -> {
             String nickname = nicknameField.getText().trim();
@@ -186,10 +182,10 @@ public class UserMain extends JFrame {
 
             String foundId = UserID.findId(nickname, phone);
             if (foundId != null) {
-                JOptionPane.showMessageDialog(this, "회원님의 아이디는 [" + foundId + "] 입니다.");
+                JOptionPane.showMessageDialog(frame, "회원님의 아이디는 [" + foundId + "] 입니다.");
                 showLoginPanel();
             } else {
-                JOptionPane.showMessageDialog(this, "일치하는 아이디가 없습니다.");
+                JOptionPane.showMessageDialog(frame, "일치하는 아이디가 없습니다.");
             }
         });
 
@@ -200,7 +196,7 @@ public class UserMain extends JFrame {
     }
 
     private void showFindPwPanel() {
-        getContentPane().removeAll();
+        removeAll();
 
         JPanel panel = new JPanel(new GridLayout(5, 2, 5, 5));
 
@@ -223,7 +219,7 @@ public class UserMain extends JFrame {
         panel.add(submitBtn);
         panel.add(backBtn);
 
-        add(panel);
+        add(panel, BorderLayout.CENTER);
 
         submitBtn.addActionListener(e -> {
             String id = idField.getText().trim();
@@ -232,15 +228,15 @@ public class UserMain extends JFrame {
             String newPw2 = new String(newPwField2.getPassword());
 
             if (!newPw1.equals(newPw2)) {
-                JOptionPane.showMessageDialog(this, "비밀번호가 일치하지 않습니다.");
+                JOptionPane.showMessageDialog(frame, "비밀번호가 일치하지 않습니다.");
                 return;
             }
             boolean success = UserID.changePassword(id, phone, newPw1);
             if (success) {
-                JOptionPane.showMessageDialog(this, "비밀번호가 성공적으로 변경되었습니다.");
+                JOptionPane.showMessageDialog(frame, "비밀번호가 성공적으로 변경되었습니다.");
                 showLoginPanel();
             } else {
-                JOptionPane.showMessageDialog(this, "일치하는 아이디가 없습니다.");
+                JOptionPane.showMessageDialog(frame, "일치하는 아이디가 없습니다.");
             }
         });
 
@@ -250,9 +246,15 @@ public class UserMain extends JFrame {
         repaint();
     }
 
+    // 테스트용 메인 (프레임에서 패널 실행)
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new UserMain().setVisible(true);
+            JFrame frame = new JFrame("UserMain 테스트");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1000, 400);
+            frame.setLocationRelativeTo(null);
+            frame.setContentPane(new UserMain(frame));
+            frame.setVisible(true);
         });
     }
 }
