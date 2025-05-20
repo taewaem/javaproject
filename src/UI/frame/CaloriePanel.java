@@ -10,6 +10,9 @@ public class CaloriePanel extends JPanel {
     private JLabel burnedLabel;
     private JLabel totalLabel;
 
+    private int foodKcal = 0;
+    private int exerKcal = 0;
+
     public CaloriePanel(){
         setLayout(new GridLayout(3, 1, 5, 5));
         setPreferredSize(new Dimension(150, 120));
@@ -26,7 +29,17 @@ public class CaloriePanel extends JPanel {
 
     }
 
-    public void updateText(int foodKcal, int exerKcal) {
+    public void setFoodKcal(int foodKcal){
+        this.foodKcal = foodKcal;
+        updateLabels();
+    }
+
+    public void setExerKcal(int exerKcal){
+        this.exerKcal = exerKcal;
+        updateLabels();
+    }
+
+    public void updateLabels() {
         intakeLabel.setText("섭취: "+foodKcal+ "kcal");
         burnedLabel.setText("소모: "+exerKcal+" kcal");
         totalLabel.setText("잔여: "+(foodKcal-exerKcal)+" kcal");
