@@ -1,4 +1,4 @@
-package src.Check;
+package check;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +33,7 @@ public class RecommendationPanel extends JPanel {
         imageLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
         // 이미지 로딩 시도
-        URL imageUrl = getClass().getResource("/image/" + check.getName() + ".png");
+        URL imageUrl = getClass().getResource("check/check.image/" + check.getName() + ".png");
         if (imageUrl != null) {
             ImageIcon icon = new ImageIcon(imageUrl);
             Image scaled = icon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);

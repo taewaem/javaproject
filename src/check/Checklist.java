@@ -1,4 +1,4 @@
-package src.Check;
+package check;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class Checklist {
 		checklist.add(new Check("간 건강", "밀크씨슬"));
 		checklist.add(new Check("장 건강", "유산균"));
 		checklist.add(new Check("수면", "슬림나이트"));
-		checklist.add(new Check("면역 기능", "우루사"));
+		checklist.add(new Check("면역 기능", "비타민C"));
 
 		// 완성된 리스트 반환
 		return checklist;
