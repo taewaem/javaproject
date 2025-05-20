@@ -130,7 +130,7 @@ public class LoginPanel extends JPanel{
         if (id.equals("user") && pw.equals("1234")) {
             JOptionPane.showMessageDialog(this, id+"님, 환영합니다!");
             SwingUtilities.getWindowAncestor(this).dispose();
-            new MainPanelFrame(); // 메인 패널 열기
+            new MainFrame(); // 메인 패널 열기
         } else {
             JOptionPane.showMessageDialog(this, "아이디 또는 비밀번호가 올바르지 않습니다.");
         }

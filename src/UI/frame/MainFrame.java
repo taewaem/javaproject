@@ -3,17 +3,18 @@ package frame;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainPanelFrame extends JFrame {
+public class MainFrame extends JFrame {
     //로그인 성공하면 열리는 frame
+    //상단에 이름과 장바구니
+    //중앙에 메뉴화면
 
-    public MainPanelFrame() {
+    public MainFrame() {
 
         Color themeColor = new Color(34, 139, 34);
 
         setTitle("NutriLog");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
-        // setBackground(new Color(34,139,34));
         setLayout(new BorderLayout());
 
 
@@ -27,7 +28,6 @@ public class MainPanelFrame extends JFrame {
 
         // 상단 고정 영역
         NorthPanel northPanel = new NorthPanel(centerPanel);
-        northPanel.setBackground(themeColor);
         add(northPanel, BorderLayout.NORTH);
         
 

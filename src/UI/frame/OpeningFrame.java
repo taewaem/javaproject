@@ -10,9 +10,9 @@ public class OpeningFrame extends JFrame {//꾸미기
     private JPanel contentPane;
     private JPanel cardPanel;
     private CardLayout cardLayout;
-    private JPanel loginButtonPanel;
+    private JPanel startButtonPanel;
     private JLabel titleLabel;
-    private JButton loginBtn;
+    private JButton startBtn;
     private JPanel btnCenterPanel;
 
 	public OpeningFrame() {
@@ -24,9 +24,8 @@ public class OpeningFrame extends JFrame {//꾸미기
 
 	    cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
-        // cardPanel.setBackground(new Color(34,139,34));
         
-        loginButtonPanel = new JPanel(null){
+        startButtonPanel = new JPanel(null){
 
             @Override
             public void doLayout() {
@@ -46,11 +45,11 @@ public class OpeningFrame extends JFrame {//꾸미기
                 int titleY = y - titleHeight + 50;
 
                 titleLabel.setBounds(titleX, titleY, titleWidth, titleHeight);
-                loginBtn.setBounds(centerX, y + 50, fieldWidth, fieldHeight);
+                startBtn.setBounds(centerX, y + 50, fieldWidth, fieldHeight);
             }
             
         };
-        loginButtonPanel.setBackground(new Color(34,139,34));
+        startButtonPanel.setBackground(new Color(34,139,34));
 
         //제목
         titleLabel = new JLabel("NutriLog");
@@ -59,23 +58,19 @@ public class OpeningFrame extends JFrame {//꾸미기
         titleLabel.setBounds(200, 30, 500, 200);
 
         //로그인 버튼
-        loginBtn = new JButton("Start");
-        loginBtn.setPreferredSize(new Dimension(120,40));
-        loginBtn.setBackground(Color.WHITE);
-        loginBtn.setForeground(Color.BLACK);
-        loginBtn.setFont(new Font("Bauhous 93",Font.PLAIN,14));
-        loginBtn.setFocusPainted(false);
-        loginBtn.setBorderPainted(false);
-        loginBtn.addActionListener(e -> showLoginPanel());
+        startBtn = new JButton("Start");
+        startBtn.setPreferredSize(new Dimension(120,40));
+        startBtn.setBackground(Color.WHITE);
+        startBtn.setForeground(Color.BLACK);
+        startBtn.setFont(new Font("Bauhaus 93",Font.PLAIN,14));
+        startBtn.setFocusPainted(false);
+        startBtn.setBorderPainted(false);
+        startBtn.addActionListener(e -> showLoginPanel());
 
-        // btnCenterPanel = new JPanel(new GridBagLayout());
-        // btnCenterPanel.setBackground(new Color(34,139,34));
-        // btnCenterPanel.add(loginBtn);
+        startButtonPanel.add(titleLabel);
+        startButtonPanel.add(startBtn);
         
-        loginButtonPanel.add(titleLabel);
-        loginButtonPanel.add(loginBtn);
-        
-        cardPanel.add(loginButtonPanel, "LoginButton");
+        cardPanel.add(startButtonPanel, "startButton");
         
         JPanel loginPanel = new LoginPanel();
         cardPanel.add(loginPanel, "loginPanel");
