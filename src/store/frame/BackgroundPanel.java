@@ -9,7 +9,7 @@
 //
 //    public BackgroundPanel() {
 //        try {
-//            URL url = getClass().getResource("/store/image/background.jpg"); // 이미지 경로
+//            URL url = getClass().getResource("/store/check.image/background.jpg"); // 이미지 경로
 //            background = new ImageIcon(url).getImage();
 //        } catch (Exception e) {
 //            System.out.println("배경 이미지 불러오기 실패: " + e.getMessage());

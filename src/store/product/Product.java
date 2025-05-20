@@ -36,4 +36,5 @@ public class Product {
     public void setDescription(ProductDescription description) {
         this.description = description;
     }
+
 }

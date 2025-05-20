@@ -28,9 +28,9 @@ public class ProductList {
                 "빈혈 예방과 세포 성장 지원",
                 "하루 1회 섭취",
                 "권장량 초과 금지")));
-        productList.add(new Product("밀크씨슬", 15000, new ProductDescription( "비타민B6",
-                "빈혈 예방과 세포 성장 지원",
-                "하루 1회 섭취",
+        productList.add(new Product("밀크씨슬", 15000, new ProductDescription(   "간 건강",
+                "간 기능 개선 및 해독 지원, 간 세포 보호",
+                "하루 1회 섭취, 식사 후 섭취 권장",
                 "권장량 초과 금지")));
         productList.add(new Product("유산균", 20000, new ProductDescription( "장 건강",
                 "장내 유익균 증식 도움",

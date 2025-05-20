@@ -19,8 +19,7 @@ public class StorePanel extends JPanel {
 
     public StorePanel() {
 
-        setLayout(new BorderLayout());
-        setOpaque(false);
+
 //        setBackground(new Color(255, 255, 255));
 //        // 타이틀
 //        JLabel title = new JLabel("영양제 상점", SwingConstants.CENTER);
@@ -29,6 +28,8 @@ public class StorePanel extends JPanel {
 //        title.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
 //        add(title, BorderLayout.NORTH);
 
+        setLayout(new BorderLayout());
+        setOpaque(false);
         // 중앙 패널 (영양제 목록)
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));

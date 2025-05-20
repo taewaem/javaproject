@@ -1,5 +1,6 @@
 package store.frame;
 
+import check.CheckPanel;
 import store.cart.Cart;
 
 import javax.swing.*;
@@ -47,6 +48,9 @@ public class MainFrame extends JFrame {
          *.....
          */
         JPanel storePanel = new StorePanel();
+        JPanel checkPanel = new CheckPanel();
+
+//        mainFrame.add(checkPanel);
         mainFrame.add(storePanel);
 
         mainFrame.setVisible(true);
