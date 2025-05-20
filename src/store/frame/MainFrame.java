@@ -12,6 +12,7 @@ public class MainFrame extends JFrame {
     // 화면 전환을 위한 패널 스택
     public static Stack<JPanel> pageStack = new Stack<>();
 
+
     // 메인 프레임에 접근하기 위한 전역 변수
     public static JFrame mainFrame;
 
@@ -19,7 +20,6 @@ public class MainFrame extends JFrame {
 
     private Cart cart = new Cart();
     public MainFrame() {
-
         System.out.println("main frame");
 
         mainFrame = this;
@@ -51,5 +51,6 @@ public class MainFrame extends JFrame {
 
         mainFrame.setVisible(true);
     }
+
 
 }

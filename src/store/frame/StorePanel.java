@@ -20,7 +20,8 @@ public class StorePanel extends JPanel {
     public StorePanel() {
 
         setLayout(new BorderLayout());
-        setBackground(new Color(255, 255, 255));
+        setOpaque(false);
+//        setBackground(new Color(255, 255, 255));
 //        // 타이틀
 //        JLabel title = new JLabel("영양제 상점", SwingConstants.CENTER);
 //        title.setFont(new Font("NanumSquareRound", Font.BOLD, 28)); // 귀여운 둥근 폰트
