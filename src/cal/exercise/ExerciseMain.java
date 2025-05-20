@@ -49,7 +49,7 @@ public class ExerciseMain extends JFrame implements ActionListener
     JTextField exerAmountField;
     
     //다른 메소드가 이용할 수 있게 멤버변수로 선언한 JLabel
-    JLabel outputExerLabel;
+    JLabel outputExerLabel, selectedExerciseLabel;
     
     //값을 입력하는 버튼의 텍스트와 현재 값을 입력받는 상태인지 점검하는 boolean변수
     String inputButtonText="입력";
@@ -83,6 +83,15 @@ public class ExerciseMain extends JFrame implements ActionListener
 		mainExerPanal.setOpaque(true);
 		mainExerPanal.setBackground(Color.blue);
 		
+		//운동 버튼을 눌렀다면, 그 운동의 기본정보를 출력해 주는 JLabel. 음식도 있어야 할까?	
+		selectedExerciseLabel = new JLabel();//운동 버튼을 눌렀을 때, 해당 운동의 정보를 출력하는 라벨
+		selectedExerciseLabel.setBounds(75, 0, 450, 100);//이 부모 컴포넌트를 기준으로 하는 x,y 좌표와 가로,세로 크기 설정
+		selectedExerciseLabel.setFont(new Font("맑은 고딕",Font.CENTER_BASELINE,12));//폰트 종류, 위치, 크기 설정
+		selectedExerciseLabel.setHorizontalAlignment(JLabel.CENTER);//가로 가운데 정렬
+		rewriteSelectedExercise("없습니다.", 0);
+		selectedExerciseLabel.setOpaque(true);
+		selectedExerciseLabel.setBackground(Color.green);
+
 		//입력받은 정보를 출력하는 JLabel
 	    outputExerLabel = new JLabel();
 	    outputExerLabel.setBounds(75, 0, 300, 100);//이 부모 컴포넌트를 기준으로 하는 x,y 좌표와 가로,세로 크기 설정
@@ -150,12 +159,6 @@ public class ExerciseMain extends JFrame implements ActionListener
 			JButton selectButton = new JButton(exercise.getExerName(),fixIcon);
 			selectButton.addActionListener(this);//만든 버튼 객체에 ActionListener 등록
 
-			//selectButton.setIcon(fixIcon);//버튼에 아이콘 입력
-
-			//버튼 텍스트의 위치조절
-			//selectButton.setHorizontalTextPosition(JButton.EAST);
-			//selectButton.setVerticalTextPosition(JButton.CENTER);
-
 			selectExerPanel.add(selectButton,gbc);//selectExerPanel 방금 만든 버튼 추가
 		}		
 		
@@ -164,6 +167,7 @@ public class ExerciseMain extends JFrame implements ActionListener
 		exerAmountField.setBounds(0, -200, 300, 100);//이 부모 컴포넌트를 기준으로 하는 x,y 좌표와 가로,세로 크기 설정
 		
 		//입출력 메인 패널에 하위 컴포넌트 입력
+		mainExerPanal.add(selectedExerciseLabel);
 		mainExerPanal.add(outputExerLabel);
 		mainExerPanal.add(inputExerTypeScroll);
 		mainExerPanal.add(exerAmountField);
@@ -191,11 +195,6 @@ public class ExerciseMain extends JFrame implements ActionListener
 		buttonPanel.add(inputButton);
 		buttonPanel.add(backButton);
 		
-		
-		//아래 6줄은 테스트용
-		
-
-
 		this.add(titleLabel,BorderLayout.NORTH);//titleLabel을 보더레이아웃 위쪽에 삽입
 		this.add(mainExerPanal,BorderLayout.CENTER);//mainExerPanal 보더레이아웃 중간에 삽입
 		this.add(buttonPanel,BorderLayout.SOUTH);//buttonPanel 보더레이아웃 아래에 삽입
@@ -219,6 +218,7 @@ public class ExerciseMain extends JFrame implements ActionListener
 				if (eventButton.getText().equals(exercise.getExerName()))//eventButton의 text가 exerlist의 name중에 있었을 시,
 				{
 					selectedExer(exercise);//멤버변수방에 대입하는 메서드
+					rewriteSelectedExercise(thisExerName,thisExerkcal);//운동 선택 정보창 갱신 메서드
 				}
 				
 			}//없다면, 이 함수는 아무것도 처리하지 않을 것.
@@ -255,6 +255,7 @@ public class ExerciseMain extends JFrame implements ActionListener
 					finally 
 					{
 						inputComVisibleSet(false);//안보이게 하는 메소드 호출
+						rewriteSelectedExercise("없습니다.",0);//정보창 초기화
 						isInputMode=false;//현재는 입력을 받지 않는 상태이다.
 					}
 					
@@ -273,6 +274,7 @@ public class ExerciseMain extends JFrame implements ActionListener
 				{
 					//입력을 취소하는 메서드
 					inputComVisibleSet(false);//안보이게 하는 메소드 호출
+					rewriteSelectedExercise("없습니다.",0);//정보창 초기화
 					isInputMode=false;//현재는 입력을 받지 않는 상태이다.
 				}
 				
@@ -311,6 +313,19 @@ public class ExerciseMain extends JFrame implements ActionListener
 		outputExerLabel.setText("<html><body><center>"+
 				"당신의 최근운동은: "+ExerciseMain.exerName+"<br>"+
 				"총 소모한 칼로리는: "+(ExerciseMain.exerKcal*min)+"Kcal"+
+				"</center></body></html>");//출력문
+		
+		//화면 재갱신
+		this.revalidate();
+		this.repaint();
+	}
+
+	//selectedExerciseLabel의 갱신 메서드
+	public void rewriteSelectedExercise(String name, double kcal)//매개변수를 받고 입력
+	{
+		selectedExerciseLabel.setText("<html><body><center>"+
+				"선택하신 운동은: "+name+"<br>"+
+				"분당 소모하는 칼로리는: "+kcal+"Kcal"+
 				"</center></body></html>");//출력문
 		
 		//화면 재갱신
