@@ -56,7 +56,7 @@ public class UserMain extends JPanel {
         repaint();
     }
 
-    private void showSignUpPanel() {
+    private void showSignUpPanel() { //회원가입 창
         removeAll();
 
         JPanel panel = new JPanel(new GridLayout(7, 2, 5, 5));
@@ -88,7 +88,7 @@ public class UserMain extends JPanel {
 
         add(panel, BorderLayout.CENTER);
 
-        submitBtn.addActionListener(e -> {
+        submitBtn.addActionListener(e -> { 
             String id = idField.getText().trim();
             String pw1 = new String(pwField.getPassword());
             String pw2 = new String(pw2Field.getPassword());
@@ -133,7 +133,7 @@ public class UserMain extends JPanel {
         repaint();
     }
 
-    private void showFindPanel() {
+    private void showFindPanel() { //ID ,PW 찾기창 
         removeAll();
 
         JPanel panel = new JPanel(new GridLayout(5, 1, 5, 5));
@@ -156,7 +156,7 @@ public class UserMain extends JPanel {
         repaint();
     }
 
-    private void showFindIdPanel() {
+    private void showFindIdPanel() { //ID 찾기
         removeAll();
 
         JPanel panel = new JPanel(new GridLayout(4, 2, 5, 5));
@@ -176,7 +176,7 @@ public class UserMain extends JPanel {
 
         add(panel, BorderLayout.CENTER);
 
-        submitBtn.addActionListener(e -> {
+        submitBtn.addActionListener(e -> { //찾기성공 
             String nickname = nicknameField.getText().trim();
             String phone = phoneField.getText().trim();
 
@@ -195,7 +195,7 @@ public class UserMain extends JPanel {
         repaint();
     }
 
-    private void showFindPwPanel() {
+    private void showFindPwPanel() {//비번찾기
         removeAll();
 
         JPanel panel = new JPanel(new GridLayout(5, 2, 5, 5));
@@ -221,7 +221,7 @@ public class UserMain extends JPanel {
 
         add(panel, BorderLayout.CENTER);
 
-        submitBtn.addActionListener(e -> {
+        submitBtn.addActionListener(e -> { 
             String id = idField.getText().trim();
             String phone = phoneField.getText().trim();
             String newPw1 = new String(newPwField1.getPassword());
@@ -245,8 +245,7 @@ public class UserMain extends JPanel {
         revalidate();
         repaint();
     }
-
-    // 테스트용 메인 (프레임에서 패널 실행)
+    //메인 테스트
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("UserMain 테스트");
