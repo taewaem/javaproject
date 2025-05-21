@@ -37,6 +37,7 @@ bin/
 .vscode/
 .idea/
 *.iml
+.vs/
 
 ### Mac OS ###
 .DS_Store
