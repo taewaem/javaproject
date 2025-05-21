@@ -7,13 +7,13 @@ import java.awt.event.*;
 public class OpeningFrame extends JFrame {//꾸미기
     //Main을 실행하면 처음 나오는 화면
     
-    private JPanel contentPane;
     private JPanel cardPanel;
     private CardLayout cardLayout;
-    private JPanel startButtonPanel;
+    private JPanel openPanel;
     private JLabel titleLabel;
     private JButton startBtn;
     private JPanel btnCenterPanel;
+
 
 	public OpeningFrame() {
 		
@@ -25,8 +25,10 @@ public class OpeningFrame extends JFrame {//꾸미기
 	    cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         
-        startButtonPanel = new JPanel(null){
+        openPanel = new JPanel(null){
 
+            protected Image backgroundImg = new ImageIcon("src/img/Background.jpg").getImage();
+            
             @Override
             public void doLayout() {
                 // 패널의 너비와 높이
@@ -49,7 +51,7 @@ public class OpeningFrame extends JFrame {//꾸미기
             }
             
         };
-        startButtonPanel.setBackground(new Color(34,139,34));
+        openPanel.setBackground(new Color(34,139,34));
 
         //제목
         titleLabel = new JLabel("NutriLog");
@@ -67,10 +69,10 @@ public class OpeningFrame extends JFrame {//꾸미기
         startBtn.setBorderPainted(false);
         startBtn.addActionListener(e -> showLoginPanel());
 
-        startButtonPanel.add(titleLabel);
-        startButtonPanel.add(startBtn);
+        openPanel.add(titleLabel);
+        openPanel.add(startBtn);
         
-        cardPanel.add(startButtonPanel, "startButton");
+        cardPanel.add(openPanel, "startButton");
         
         JPanel loginPanel = new LoginPanel();
         cardPanel.add(loginPanel, "loginPanel");

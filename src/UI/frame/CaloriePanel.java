@@ -16,12 +16,15 @@ public class CaloriePanel extends JPanel {
     public CaloriePanel(){
         setLayout(new GridLayout(3, 1, 5, 5));
         setPreferredSize(new Dimension(150, 120));
-        setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
-        setBackground(Color.WHITE);
+        //setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        setBackground(new Color(0,0,0,0));
 
         intakeLabel = new JLabel("섭취: - kcal", SwingConstants.CENTER);
+        intakeLabel.setFont(new Font("돋움체",Font.BOLD,20));
         burnedLabel = new JLabel("소모: - kcal", SwingConstants.CENTER);
+        burnedLabel.setFont(new Font("돋움체",Font.BOLD,20));
         totalLabel = new JLabel("잔여: - kcal", SwingConstants.CENTER);
+        totalLabel.setFont(new Font("돋움체",Font.BOLD,20));
 
         add(intakeLabel);
         add(burnedLabel);
