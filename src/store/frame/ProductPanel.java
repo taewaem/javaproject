@@ -16,10 +16,13 @@ public class ProductPanel extends JPanel {
     private JButton cartButton;
     private JButton backButton;
     private Cart cart;
-
+    private BackgroundPanel backgroundPanel;
 
     public ProductPanel(Product product) {
         cart = new Cart();
+
+        backgroundPanel = new BackgroundPanel();
+
 
         // 전체 패널 배경: 연한 아이보리
         setBackground(new Color(250, 250, 245));
@@ -42,6 +45,7 @@ public class ProductPanel extends JPanel {
         ));
         imagePanel.add(imageLabel, BorderLayout.CENTER);
         imagePanel.setPreferredSize(new Dimension(300, 320));
+        imagePanel.setOpaque(false);
         add(imagePanel, BorderLayout.WEST);
 
         // 오른쪽 정보 패널
@@ -49,6 +53,7 @@ public class ProductPanel extends JPanel {
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 30));
         infoPanel.setBackground(new Color(250, 250, 245)); // 전체와 맞춤
+        infoPanel.setOpaque(false);
 
         // 제품명
         JLabel nameLabel = new JLabel(product.getName());
@@ -94,6 +99,7 @@ public class ProductPanel extends JPanel {
         JLabel quantityLabel = new JLabel("수량:");
         quantityLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
         quantityLabel.setForeground(new Color(60, 60, 60));
+        quantityPanel.setOpaque(false);
 
         SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 99, 1);
         JSpinner quantitySpinner = new JSpinner(spinnerModel);
@@ -114,6 +120,7 @@ public class ProductPanel extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
         buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         buttonPanel.setBackground(new Color(250, 250, 245));
+        buttonPanel.setOpaque(false);
 
         cartButton = new JButton("장바구니 담기");
         cartButton.setBackground(new Color(98, 0, 220));
@@ -202,5 +209,12 @@ public class ProductPanel extends JPanel {
         label.setForeground(new Color(70, 70, 70));
         label.setAlignmentX(Component.LEFT_ALIGNMENT);
         return label;
+    }
+
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        backgroundPanel.paintBackground(g, this);
     }
 }

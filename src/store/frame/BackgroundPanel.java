@@ -1,27 +1,28 @@
-//package store.frame;
-//
-//import javax.swing.*;
-//import java.awt.*;
-//import java.net.URL;
-//
-//public class BackgroundPanel extends JPanel {
-//    private Image background;
-//
-//    public BackgroundPanel() {
-//        try {
-//            URL url = getClass().getResource("/store/check.image/background.jpg"); // 이미지 경로
-//            background = new ImageIcon(url).getImage();
-//        } catch (Exception e) {
-//            System.out.println("배경 이미지 불러오기 실패: " + e.getMessage());
-//        }
-//        setOpaque(false); // 배경 패널도 투명 지정
-//    }
-//
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        if (background != null) {
-//            g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-//        }
-//    }
-//}
+package store.frame;
+
+import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
+
+public class BackgroundPanel {
+
+    private Image backgroundImage;
+
+    // 배경 이미지를 설정하는 생성자
+    public BackgroundPanel() {
+        URL bgUrl = getClass().getResource("/store/image/Background.jpg");
+        if (bgUrl != null) {
+            backgroundImage = new ImageIcon(bgUrl).getImage();
+        } else {
+            System.out.println("배경 이미지 로딩 실패");
+        }
+    }
+
+    // 배경 이미지를 그리는 메서드
+    public void paintBackground(Graphics g, JPanel panel) {
+        if (backgroundImage != null) {
+            // 배경 이미지를 패널 크기에 맞게 그리기
+            g.drawImage(backgroundImage, 0, 0, panel.getWidth(), panel.getHeight(), panel);
+        }
+    }
+}

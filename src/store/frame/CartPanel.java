@@ -16,9 +16,11 @@ public class CartPanel extends JPanel {
 
     private Cart cart;
     private UtilPanel utilPanel = new UtilPanel();
+    private BackgroundPanel backgroundPanel = new BackgroundPanel();
 
     public CartPanel(Cart cart) {
         this.cart = cart;
+
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
@@ -26,6 +28,8 @@ public class CartPanel extends JPanel {
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(Color.WHITE);
         topPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        topPanel.setOpaque(false);
+
         totalLabel = new JLabel();
         totalLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
         totalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -36,13 +40,19 @@ public class CartPanel extends JPanel {
         itemPanel = new JPanel();
         itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
         itemPanel.setBackground(Color.WHITE);
+        itemPanel.setOpaque(false);
+
         JScrollPane scrollPane = new JScrollPane(itemPanel);
+        scrollPane.setOpaque(false);
         scrollPane.setBorder(null);
+        scrollPane.setBackground(Color.WHITE);
         add(scrollPane, BorderLayout.CENTER);
 
         // 하단 버튼
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setOpaque(false);
+
         clearButton = new JButton("전체 삭제");
         backButton = new JButton("이전");
 
@@ -74,10 +84,14 @@ public class CartPanel extends JPanel {
 
     private void refreshCartView() {
         itemPanel.removeAll();
+        itemPanel.setOpaque(false);
 
         for (CartItem item : cart.getItems()) {
+
             JPanel card = new JPanel(new BorderLayout());
             card.setBackground(Color.WHITE);
+            card.setOpaque(false);
+
             card.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(new Color(220, 220, 220)),
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)
@@ -100,6 +114,7 @@ public class CartPanel extends JPanel {
             infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
             infoPanel.setBackground(Color.WHITE);
             infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));
+            infoPanel.setOpaque(false);
 
             JLabel nameLabel = new JLabel(item.getProduct().getName());
             nameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -131,6 +146,8 @@ public class CartPanel extends JPanel {
             quantityPanel.setBackground(Color.WHITE);
             quantityPanel.add(new JLabel("수량: "));
             quantityPanel.add(quantitySpinner);
+            quantityPanel.setOpaque(false);
+
 
             infoPanel.add(nameLabel);
             infoPanel.add(Box.createVerticalStrut(5));
@@ -155,6 +172,7 @@ public class CartPanel extends JPanel {
             JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             rightPanel.setBackground(Color.WHITE);
             rightPanel.add(deleteBtn);
+            rightPanel.setOpaque(false);
 
             card.add(infoPanel, BorderLayout.CENTER);
             card.add(rightPanel, BorderLayout.EAST);
@@ -169,5 +187,11 @@ public class CartPanel extends JPanel {
 
         revalidate();
         repaint();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // 기본적인 페인팅 작업
+        backgroundPanel.paintBackground(g, this); // 배경 그리기
     }
 }

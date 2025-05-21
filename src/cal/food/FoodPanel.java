@@ -1,5 +1,7 @@
 package cal.food;
 
+import store.frame.BackgroundPanel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +9,7 @@ import javax.swing.*;
 import java.net.URL;
 import java.util.List;
 
-public class FoodPanel extends JPanel implements ActionListener {
+public class FoodPanel extends JPanel {
 
 	// 음식 정보 저장용 멤버 변수
 	public static String foodName = "없습니다";
@@ -16,9 +18,9 @@ public class FoodPanel extends JPanel implements ActionListener {
 	private static String thisFoodName = "없습니다";
 	private static double thisFoodkcal = 0.0;
 
-	private static double totalCaloriesBurned = 0.0;
+	public static double totalCaloriesBurned = 0.0;
 	// 음식 리스트
-	List<Food> foodList = FoodList.getFoodList();
+	private List<Food> foodList = FoodList.getFoodList();
 
 	// 음식 정보를 표시할 JLabel
 	private JLabel foodInfoLabel;
@@ -32,10 +34,12 @@ public class FoodPanel extends JPanel implements ActionListener {
 
 	// 버튼을 통한 입력 모드 처리 변수
 	private boolean isInputMode = false;
+	private BackgroundPanel backgroundPanel;
 
 	// 기본 생성자
 	public FoodPanel() {
 
+		backgroundPanel = new BackgroundPanel();
 		setLayout(new BorderLayout());
 		setSize(800, 600);
 
@@ -48,15 +52,15 @@ public class FoodPanel extends JPanel implements ActionListener {
 		// main
 		JPanel mainfoodInfoPanel = new JPanel();
 		mainfoodInfoPanel.setLayout(new GridLayout(1, 2, 10, 10));
-
+		mainfoodInfoPanel.setOpaque(false);
 		//왼쪽
-		JPanel selectFoodPanel = new JPanel();
-		selectFoodPanel.setLayout(new GridBagLayout());
+		JPanel selectFoodPanel = new JPanel(new GridBagLayout());
+		selectFoodPanel.setOpaque(false);
 
 		//오른쪽
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new BorderLayout());
-
+		infoPanel.setOpaque(false);
 		// 음식 정보를 표시할 JLabel
 		foodInfoLabel = new JLabel("<html><h2>음식을 선택하세요!</h2><br><h3>칼로리: 0 Kcal</h3></html>");
 		foodInfoLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
@@ -69,6 +73,7 @@ public class FoodPanel extends JPanel implements ActionListener {
 		// 음식 양 입력 패널
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(new FlowLayout());
+		inputPanel.setOpaque(false);
 
 		// 음식 양 입력 필드와 버튼
 		foodAmountField = new JTextField(5);
@@ -82,9 +87,9 @@ public class FoodPanel extends JPanel implements ActionListener {
 
 				// 총 칼로리 계산
 				totalCalories += thisFoodkcal * amount;
-				System.out.println(totalCalories);
+				System.out.println("총 섭취한 칼로리: " + totalCalories);
 
-				JOptionPane.showMessageDialog(this, thisFoodName + "을 " + amount + "인분 먹었을 때\n소모된 칼로리: " + thisFoodkcal * amount + " Kcal");
+				JOptionPane.showMessageDialog(this, thisFoodName + "을 " + amount + "인분 먹었을 때\n섭취한 칼로리: " + thisFoodkcal * amount + " Kcal");
 			} catch (NumberFormatException ex) {
 				JOptionPane.showMessageDialog(this, "음식 양을 정확하게 입력해주세요.");
 			}
@@ -96,6 +101,7 @@ public class FoodPanel extends JPanel implements ActionListener {
 
 		// 오른쪽 패널에 음식 정보 및 이미지 추가
 		JPanel rightPanel = new JPanel();
+		rightPanel.setOpaque(false);
 		rightPanel.setLayout(new BorderLayout());
 		rightPanel.add(foodInfoLabel, BorderLayout.NORTH);
 		rightPanel.add(foodImageLabel, BorderLayout.CENTER);
@@ -104,11 +110,8 @@ public class FoodPanel extends JPanel implements ActionListener {
 		// 음식 선택 패널
 		JScrollPane inputFoodTypeScroll = new JScrollPane(selectFoodPanel);
 		inputFoodTypeScroll.getVerticalScrollBar().setUnitIncrement(12);
-		inputFoodTypeScroll.setPreferredSize(new Dimension(400, 400));
+		inputFoodTypeScroll.setPreferredSize(new Dimension(800, 400));
 
-
-//		JPanel selectFoodPanel = new JPanel();
-//		selectFoodPanel.setLayout(new GridLayout(0, 2, 10, 10));
 
 		// 음식 목록에서 버튼 생성
 		for (int i = 0; i < foodList.size(); i++) {
@@ -135,6 +138,7 @@ public class FoodPanel extends JPanel implements ActionListener {
 			selectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			selectButton.setBorderPainted(false);
 			selectButton.setContentAreaFilled(false);
+			selectButton.setBackground(new Color(0,0,0,0));
 			// 버튼 클릭 시 음식 정보 업데이트
 			selectButton.addActionListener(e -> {
 				thisFoodName = food.getFoodName();
@@ -168,7 +172,8 @@ public class FoodPanel extends JPanel implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// 버튼 클릭 시 수행할 액션 처리
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g); // 기본적인 페인팅 작업
+		backgroundPanel.paintBackground(g, this); // 배경 그리기
 	}
 }

@@ -10,14 +10,17 @@ import java.awt.*;
 import java.net.URL;
 import java.util.List;
 
+
 public class StorePanel extends JPanel {
 
     private ProductService productService = new ProductService();
     private List<Product> products = productService.getAllProduct();
     private UtilPanel utilPanel = new UtilPanel();
     private JPanel productPanel;
+    private BackgroundPanel backgroundPanel;
 
     public StorePanel() {
+
 
 
 //        setBackground(new Color(255, 255, 255));
@@ -27,6 +30,8 @@ public class StorePanel extends JPanel {
 //        title.setForeground(new Color(140, 80, 255));  // 밝은 보라색
 //        title.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
 //        add(title, BorderLayout.NORTH);
+
+        backgroundPanel = new BackgroundPanel();
 
         setLayout(new BorderLayout());
         setOpaque(false);
@@ -129,4 +134,9 @@ public class StorePanel extends JPanel {
         }
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        backgroundPanel.paintBackground(g, this);
+    }
 }

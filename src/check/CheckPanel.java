@@ -1,5 +1,6 @@
 package check;
 
+import store.frame.BackgroundPanel;
 import store.frame.MainFrame;
 import store.frame.ProductPanel;
 import store.frame.UtilPanel;
@@ -17,8 +18,10 @@ public class CheckPanel extends JPanel {
     private UtilPanel utilPanel = new UtilPanel();
     private ProductService productService = new ProductService();
     private JPanel checkPanel;
-
+    private BackgroundPanel backgroundPanel;
     public CheckPanel() {
+
+        backgroundPanel = new BackgroundPanel();
         setLayout(new BorderLayout());
         setOpaque(false);
 
@@ -111,5 +114,11 @@ public class CheckPanel extends JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "추천 영양제가 없습니다.");
         }
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // 기본적인 페인팅 작업
+        backgroundPanel.paintBackground(g, this); // 배경 그리기
     }
 }
