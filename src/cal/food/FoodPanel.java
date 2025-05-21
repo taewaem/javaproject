@@ -133,7 +133,8 @@ public class FoodPanel extends JPanel implements ActionListener {
 			JButton selectButton = new JButton(food.getFoodName(), icon);
 			selectButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
 			selectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
+			selectButton.setBorderPainted(false);
+			selectButton.setContentAreaFilled(false);
 			// 버튼 클릭 시 음식 정보 업데이트
 			selectButton.addActionListener(e -> {
 				thisFoodName = food.getFoodName();

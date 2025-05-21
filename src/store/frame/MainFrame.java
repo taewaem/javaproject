@@ -54,10 +54,11 @@ public class MainFrame extends JFrame {
         JPanel exercisePanel = new ExercisePanel();
         JPanel foodPanel = new FoodPanel();
 
-        mainFrame.add(checkPanel);
+//        mainFrame.add(checkPanel);
 //        mainFrame.add(storePanel);
 //        mainFrame.add(exercisePanel);
-//        mainFrame.add(foodPanel);
+        mainFrame.add(foodPanel);
+
 
         mainFrame.setVisible(true);
     }

@@ -124,6 +124,8 @@ public class ExercisePanel extends JPanel {
 			JButton selectButton = new JButton(exercise.getExerName(), fixIcon);
 			selectButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15)); // 버튼 테두리 설정
 			selectButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // 마우스 커서 설정
+			selectButton.setBorderPainted(false);
+			selectButton.setContentAreaFilled(false);
 
 			// 버튼 클릭 시 운동 정보 표시
 			selectButton.addActionListener(e -> {
