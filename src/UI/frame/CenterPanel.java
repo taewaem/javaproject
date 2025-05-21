@@ -1,11 +1,15 @@
 package UI.frame;
 
+import store.cart.Cart;
+import store.frame.CartPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class CenterPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel cardPanel;
+    private Cart cart = new Cart();
 
     public CenterPanel() {
         cardLayout = new CardLayout();
@@ -19,7 +23,7 @@ public class CenterPanel extends JPanel {
         cardPanel.add(new BoardPanel(), "board");
         cardPanel.add(new HealthPanel(), "health");
         cardPanel.add(new ShopPanel(), "shop");
-        cardPanel.add(new CartPanel(), "cart");
+        cardPanel.add(new CartPanel(cart), "cart");
         setLayout(new BorderLayout());
         add(cardPanel, BorderLayout.CENTER);
 
