@@ -49,7 +49,7 @@ public class ExercisePanel extends JPanel {
 
 		// 왼쪽 패널: 운동 이미지 버튼을 나열할 곳
 		JPanel selectExerPanel = new JPanel(new GridBagLayout());
-		selectExerPanel.setOpaque(false);
+		selectExerPanel.setBackground(Color.WHITE);
 
 		// 오른쪽 패널: 선택된 운동 정보(운동 이름, 칼로리)를 표시
 		JPanel infoPanel = new JPanel();

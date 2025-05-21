@@ -55,7 +55,7 @@ public class FoodPanel extends JPanel {
 		mainfoodInfoPanel.setOpaque(false);
 		//왼쪽
 		JPanel selectFoodPanel = new JPanel(new GridBagLayout());
-		selectFoodPanel.setOpaque(false);
+		selectFoodPanel.setBackground(Color.WHITE);
 
 		//오른쪽
 		JPanel infoPanel = new JPanel();

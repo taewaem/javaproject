@@ -37,15 +37,18 @@ public class CartPanel extends JPanel {
         add(topPanel, BorderLayout.NORTH);
 
         // 상품 목록 패널
-        itemPanel = new JPanel();
+        itemPanel = new JPanel(){
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g); // 기본적인 페인팅 작업
+                    backgroundPanel.paintBackground(g, this); // 배경 그리기
+                }};
         itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
         itemPanel.setBackground(Color.WHITE);
-        itemPanel.setOpaque(false);
 
         JScrollPane scrollPane = new JScrollPane(itemPanel);
-        scrollPane.setOpaque(false);
         scrollPane.setBorder(null);
-        scrollPane.setBackground(Color.WHITE);
+        scrollPane.getViewport().setBackground(Color.WHITE);
         add(scrollPane, BorderLayout.CENTER);
 
         // 하단 버튼
@@ -90,7 +93,6 @@ public class CartPanel extends JPanel {
 
             JPanel card = new JPanel(new BorderLayout());
             card.setBackground(Color.WHITE);
-            card.setOpaque(false);
 
             card.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(new Color(220, 220, 220)),
@@ -114,7 +116,7 @@ public class CartPanel extends JPanel {
             infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
             infoPanel.setBackground(Color.WHITE);
             infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));
-            infoPanel.setOpaque(false);
+
 
             JLabel nameLabel = new JLabel(item.getProduct().getName());
             nameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
