@@ -1,5 +1,6 @@
 package cal.food;
 
+import Login.User;
 import store.frame.BackgroundPanel;
 
 import java.awt.*;
@@ -8,6 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.net.URL;
 import java.util.List;
+
+import static UI.frame.CaloriePanel.user;
 
 public class FoodPanel extends JPanel {
 
@@ -35,6 +38,7 @@ public class FoodPanel extends JPanel {
 	// 버튼을 통한 입력 모드 처리 변수
 	private boolean isInputMode = false;
 	private BackgroundPanel backgroundPanel;
+
 
 	// 기본 생성자
 	public FoodPanel() {
@@ -86,8 +90,11 @@ public class FoodPanel extends JPanel {
 				int amount = Integer.parseInt(foodAmountField.getText());
 
 				// 총 칼로리 계산
+
+
 				totalCalories += thisFoodkcal * amount;
 				System.out.println("총 섭취한 칼로리: " + totalCalories);
+				user.setTotalFoodKcal(totalCalories);
 
 				JOptionPane.showMessageDialog(this, thisFoodName + "을 " + amount + "인분 먹었을 때\n섭취한 칼로리: " + thisFoodkcal * amount + " Kcal");
 			} catch (NumberFormatException ex) {

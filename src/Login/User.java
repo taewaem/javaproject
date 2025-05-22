@@ -7,7 +7,12 @@ public class User {
 	private String nickname;// 닉네임
 	private String birthday;// 생년월일
 	private String phnumber;// 전화번호
+	private double totalFoodKcal;
+	private double totalExerKcal;
 
+	public User(){
+
+	}
 	public User(String id, String pw, String nickename, String birthday, String phnumber) {
 		this.id = id;
 		this.pw = pw;
@@ -55,6 +60,22 @@ public class User {
 
 	public void setPhnumber(String phnumber) {
 		this.phnumber = phnumber;
+	}
+
+	public double getTotalFoodKcal() {
+		return totalFoodKcal;
+	}
+
+	public void setTotalFoodKcal(double totalFoodKcal) {
+		this.totalFoodKcal = totalFoodKcal;
+	}
+
+	public double getTotalExerKcal() {
+		return totalExerKcal;
+	}
+
+	public void setTotalExerKcal(double totalExerKcal) {
+		this.totalExerKcal = totalExerKcal;
 	}
 
 	@Override

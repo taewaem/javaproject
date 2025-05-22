@@ -6,17 +6,18 @@ import store.cart.CartItem;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 public class CartPanel extends JPanel {
 
     private JPanel itemPanel;
     private JLabel totalLabel;
-    private JButton backButton;
     private JButton clearButton;
 
     private Cart cart;
-    private UtilPanel utilPanel = new UtilPanel();
     private BackgroundPanel backgroundPanel = new BackgroundPanel();
+    private DecimalFormat df = new DecimalFormat("###,###");
+
 
     public CartPanel(Cart cart) {
         this.cart = cart;
@@ -57,7 +58,7 @@ public class CartPanel extends JPanel {
         buttonPanel.setOpaque(false);
 
         clearButton = new JButton("전체 삭제");
-        backButton = new JButton("이전");
+//        backButton = new JButton("이전");
 
         clearButton.setBackground(new Color(240, 70, 70));
         clearButton.setForeground(Color.WHITE);
@@ -65,21 +66,21 @@ public class CartPanel extends JPanel {
         clearButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
         clearButton.setPreferredSize(new Dimension(100, 40));
 
-        backButton = new JButton("이전");
-        backButton.setBackground(new Color(128, 128, 128));
-        backButton.setForeground(Color.WHITE);
-        backButton.setFocusPainted(false);
-        backButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-        backButton.setPreferredSize(new Dimension(80, 40));
+//        backButton = new JButton("이전");
+//        backButton.setBackground(new Color(128, 128, 128));
+//        backButton.setForeground(Color.WHITE);
+//        backButton.setFocusPainted(false);
+//        backButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+//        backButton.setPreferredSize(new Dimension(80, 40));
 
-        backButton.addActionListener(e -> utilPanel.goBackPage());
+//        backButton.addActionListener(e -> utilPanel.goBackPage());
         clearButton.addActionListener(e -> {
             cart.clear(); // 전체 삭제
             refreshCartView();
         });
 
         buttonPanel.add(clearButton);
-        buttonPanel.add(backButton);
+//        buttonPanel.add(backButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
         refreshCartView();
@@ -122,13 +123,13 @@ public class CartPanel extends JPanel {
             nameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 
             int price = item.getProduct().getPrice();
-            String formatPrice = MainFrame.df.format(price);
+            String formatPrice = df.format(price);
             JLabel priceLabel = new JLabel(formatPrice + "원" );
             priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
             priceLabel.setForeground(new Color(108, 0, 255));
 
             int totalPrice = item.getProduct().getPrice() * item.getQuantity();
-            String formatTotalPrice = MainFrame.df.format(totalPrice);
+            String formatTotalPrice = df.format(totalPrice);
             JLabel totalPriceLabel = new JLabel("총 금액: " + formatTotalPrice  + "원");
             totalPriceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
             totalPriceLabel.setForeground(new Color(108, 0, 255));
@@ -184,7 +185,7 @@ public class CartPanel extends JPanel {
         }
 
         int cartTotalPrice = cart.getTotalPrice();
-        String formatCartTotalPrice = MainFrame.df.format(cartTotalPrice);
+        String formatCartTotalPrice = df.format(cartTotalPrice);
         totalLabel.setText("총 금액: " + formatCartTotalPrice + "원");
 
         revalidate();

@@ -1,7 +1,6 @@
 package check;
 
 import store.frame.BackgroundPanel;
-import store.frame.MainFrame;
 import store.frame.ProductPanel;
 import store.frame.UtilPanel;
 import store.product.Product;
@@ -15,10 +14,11 @@ import java.util.List;
 public class CheckPanel extends JPanel {
 
     private List<Check> checks = Checklist.getAllCheck();
-    private UtilPanel utilPanel = new UtilPanel();
     private ProductService productService = new ProductService();
     private JPanel checkPanel;
     private BackgroundPanel backgroundPanel;
+    private UtilPanel utilPanel = new UtilPanel();
+
     public CheckPanel() {
 
         backgroundPanel = new BackgroundPanel();
@@ -109,8 +109,7 @@ public class CheckPanel extends JPanel {
         // 해당 건강 상태에 맞는 추천 영양제 패널로 이동
         Product recommendedProducts = productService.getProduct(check.getDescription());
         if (recommendedProducts != null) {
-            ProductPanel productPanel = new ProductPanel(recommendedProducts);
-            utilPanel.goToPage(productPanel);
+            utilPanel.switchPanel(this, new ProductPanel(recommendedProducts));
         } else {
             JOptionPane.showMessageDialog(this, "추천 영양제가 없습니다.");
         }

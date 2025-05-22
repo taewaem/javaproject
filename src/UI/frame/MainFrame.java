@@ -16,6 +16,8 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
         setLayout(new BorderLayout());
+        setLocationRelativeTo(null);        //화면 중앙에 띄우기
+        setResizable(false);                //화면 사이즈 조절 x
 
         // 내용 화면 영역
         CenterPanel centerPanel = new CenterPanel();

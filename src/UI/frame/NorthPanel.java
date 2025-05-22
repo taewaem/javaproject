@@ -1,8 +1,13 @@
 package UI.frame;
 
+import store.frame.CartPanel;
+import store.frame.UtilPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
+import static UI.frame.CenterPanel.cart;
 
 public class NorthPanel extends JPanel {
     //상단에 고정(이름, 장바구니)
@@ -11,6 +16,7 @@ public class NorthPanel extends JPanel {
     private JButton cartBtn;
     private JPanel titlePanel;
     private JPanel btnPanel;
+    private UtilPanel utilPanel = new UtilPanel();
 
     public NorthPanel(CenterPanel centerPanel) {
         setBackground(new Color(34,139,34));
@@ -25,7 +31,7 @@ public class NorthPanel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                centerPanel.showPanel("menu");
+              utilPanel.switchPanel(centerPanel, new MenuPanel(centerPanel));
             }
             
         });
@@ -43,7 +49,7 @@ public class NorthPanel extends JPanel {
         cartBtn.setForeground(Color.BLACK);
         cartBtn.setFocusPainted(false);
         cartBtn.setBorderPainted(false);
-        cartBtn.addActionListener(e -> centerPanel.showPanel("cart"));
+        cartBtn.addActionListener(e -> utilPanel.switchPanel(centerPanel, new CartPanel(cart)));
         //버튼 패널
         btnPanel = new JPanel(null);
         btnPanel.setOpaque(false);

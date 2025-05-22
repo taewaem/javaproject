@@ -14,13 +14,11 @@ import java.awt.*;
 public class CenterPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel cardPanel;
-    private Cart cart = new Cart();
+    public static Cart cart = new Cart();
 
     public CenterPanel() {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
-
-        CaloriePanel caloriePanel = new CaloriePanel();
 
         // cardPanel.add(caloriePanel, "calories");    //칼로리패널을 메뉴페널에서 분리하여 배치해보기
         cardPanel.add(new MenuPanel(this), "menu");
@@ -39,6 +37,7 @@ public class CenterPanel extends JPanel {
     }
 
     public void showPanel(String name) {
+
         cardLayout.show(cardPanel, name);
     }
 }

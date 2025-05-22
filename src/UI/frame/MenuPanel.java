@@ -1,5 +1,11 @@
 package UI.frame;
 
+import cal.exercise.ExercisePanel;
+import cal.food.FoodPanel;
+import check.CheckPanel;
+import store.frame.StorePanel;
+import store.frame.UtilPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +20,7 @@ public class MenuPanel extends JPanel {
     private Color themeColor = new Color(34, 139, 34);
     private Font themeFont = new Font("Bauhaus 93",Font.PLAIN,30);
     private Dimension btnSize = new Dimension(100, 60);
+    private UtilPanel utilPanel = new UtilPanel();
 
     public MenuPanel(CenterPanel centerPanel) {
 
@@ -30,15 +37,15 @@ public class MenuPanel extends JPanel {
 
         GridBagConstraints c = new GridBagConstraints();
 
-        // CaloriePanel 추가(왼쪽) -- 메뉴페널 외부로 수정 중
-        // CaloriePanel caloriePanel = new CaloriePanel();
-        // caloriePanel.setPreferredSize(new Dimension(180, 180));
-        // c.gridx = 0;
-        // c.gridy = 0;
-        // c.gridheight = 3;
-        // c.insets = new Insets(0, 0, 0, 40); //오른쪽 여백
-        // c.anchor = GridBagConstraints.CENTER;
-        // add(caloriePanel, c);
+//         CaloriePanel 추가(왼쪽) -- 메뉴페널 외부로 수정 중
+         CaloriePanel caloriePanel = new CaloriePanel();
+         caloriePanel.setPreferredSize(new Dimension(180, 180));
+         c.gridx = 0;
+         c.gridy = 0;
+         c.gridheight = 3;
+         c.insets = new Insets(0, 0, 0, 40); //오른쪽 여백
+         c.anchor = GridBagConstraints.CENTER;
+         add(caloriePanel, c);
 
         //버튼들(오른쪽)
         
@@ -94,12 +101,20 @@ public class MenuPanel extends JPanel {
             btn.setBorderPainted(false);
         }
 
-        //버튼 클릭 시 패널 전환
-        dietBtn.addActionListener(e -> centerPanel.showPanel("food"));
-        exerciseBtn.addActionListener(e -> centerPanel.showPanel("exercise"));
-        boardBtn.addActionListener(e -> centerPanel.showPanel("board"));
-        healthBtn.addActionListener(e -> centerPanel.showPanel("check"));
-        shopBtn.addActionListener(e -> centerPanel.showPanel("store"));
+//        //버튼 클릭 시 패널 전환
+//        dietBtn.addActionListener(e -> centerPanel.showPanel("food"));
+//        exerciseBtn.addActionListener(e -> centerPanel.showPanel("exercise"));
+//        boardBtn.addActionListener(e -> centerPanel.showPanel("board"));
+//        healthBtn.addActionListener(e -> centerPanel.showPanel("check"));
+//        shopBtn.addActionListener(e -> centerPanel.showPanel("store"));
+
+
+        dietBtn.addActionListener(e -> utilPanel.switchPanel(centerPanel, new FoodPanel()));
+        exerciseBtn.addActionListener(e -> utilPanel.switchPanel(centerPanel, new ExercisePanel()));
+        boardBtn.addActionListener(e -> utilPanel.switchPanel(centerPanel, new BoardPanel()));
+        healthBtn.addActionListener(e -> utilPanel.switchPanel(centerPanel, new CheckPanel()));
+        shopBtn.addActionListener(e -> utilPanel.switchPanel(centerPanel, new StorePanel()));
+
     }
 
     @Override

@@ -1,13 +1,13 @@
 
 package store.frame;
 
-import store.frame.UtilPanel;
 import store.product.Product;
 import store.product.ProductService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.List;
 
 
@@ -15,9 +15,10 @@ public class StorePanel extends JPanel {
 
     private ProductService productService = new ProductService();
     private List<Product> products = productService.getAllProduct();
-    private UtilPanel utilPanel = new UtilPanel();
     private JPanel productPanel;
     private BackgroundPanel backgroundPanel;
+    private DecimalFormat df = new DecimalFormat("###,###");
+    private UtilPanel utilPanel = new UtilPanel();
 
     public StorePanel() {
 
@@ -106,7 +107,7 @@ public class StorePanel extends JPanel {
 
             // 가격 라벨
             int price = product.getPrice();
-            String formattedPrice = MainFrame.df.format(price) + "원";
+            String formattedPrice = df.format(price) + "원";
             JLabel priceLabel = new JLabel(formattedPrice, SwingConstants.CENTER);
             priceLabel.setFont(new Font("NanumSquareRound", Font.BOLD, 13));
             priceLabel.setForeground(new Color(140, 60, 255)); // 보라톤 유지
@@ -128,7 +129,7 @@ public class StorePanel extends JPanel {
         System.out.println("선택된 영양제: " + productName);
         for (Product p : products) {
             if (productName.equals(p.getName())) {
-                utilPanel.goToPage(new ProductPanel(p));    //ProductPanel로 이동
+                utilPanel.switchPanel(this, new ProductPanel(p));
                 break;
             }
         }

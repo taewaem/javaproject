@@ -1,5 +1,6 @@
 package cal.exercise;
 
+import Login.User;
 import store.frame.BackgroundPanel;
 
 import java.awt.*;
@@ -10,6 +11,8 @@ import java.util.List;
 
 import javax.swing.*;
 
+import static UI.frame.CaloriePanel.user;
+
 // JFrame과 ActionListener를 상속받은 ExercisePanel 클래스
 public class ExercisePanel extends JPanel {
 
@@ -17,8 +20,7 @@ public class ExercisePanel extends JPanel {
 	private static String thisExerName = "없습니다";
 	private static double thisExerkcal = 0.0;
 
-	public static double totalCalories = 0.0;
-
+	private double totalCalories = 0.0;
 
 	// 현재 운동 종류를 나타내는 List
 	private List<Exercise> exerList = ExerciseList.getAllExercise();
@@ -28,6 +30,7 @@ public class ExercisePanel extends JPanel {
 	private JLabel exerciseImageLabel;
 
 	private BackgroundPanel backgroundPanel;
+
 	// 기본 생성자
 	public ExercisePanel()
 	{
@@ -81,6 +84,8 @@ public class ExercisePanel extends JPanel {
 
 				totalCalories += thisExerkcal * timeInMinutes;
 				System.out.println("총 소모된 칼로리: " + totalCalories);
+				user.setTotalExerKcal(totalCalories);
+
 				// 시간에 따른 칼로리 소모 계산
 				JOptionPane.showMessageDialog(this, thisExerName + " 운동을 " + timeInMinutes + "분 동안 했을 때\n소모된 칼로리: " + thisExerkcal * timeInMinutes + " Kcal");
 			} catch (NumberFormatException ex) {
