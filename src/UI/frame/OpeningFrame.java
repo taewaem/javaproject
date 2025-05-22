@@ -18,7 +18,7 @@ public class OpeningFrame extends JFrame {//꾸미기
 		
 		setTitle("NutriLog");
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setSize(500, 350);
+	    setSize(800, 500);
 	    setLocationRelativeTo(null);  // 가운데 정렬
 
 	    cardLayout = new CardLayout();
@@ -28,11 +28,12 @@ public class OpeningFrame extends JFrame {//꾸미기
             
             @Override
             public void doLayout() {
+                
                 // 패널의 너비와 높이
                 int panelWidth = getWidth();
-                int y = 100;  // 시작 y 위치
+                int y = 150;  // 시작 y 위치
                 int fieldWidth = 200;
-                int fieldHeight = 30;
+                int fieldHeight = 80;
 
                 // 가운데 정렬된 x 좌표 계산
                 int centerX = (panelWidth - fieldWidth) / 2;
@@ -41,10 +42,10 @@ public class OpeningFrame extends JFrame {//꾸미기
                 int titleWidth = fm.stringWidth(titleLabel.getText());
                 int titleHeight = fm.getHeight();
                 int titleX = (panelWidth - titleWidth) / 2;
-                int titleY = y - titleHeight + 70;
+                int titleY = y - titleHeight + 170;
 
                 titleLabel.setBounds(titleX, titleY, titleWidth, titleHeight);
-                startBtn.setBounds(centerX, y + 80, fieldWidth, fieldHeight);
+                startBtn.setBounds(centerX, y + 150, fieldWidth, fieldHeight);
             }
             
         };
@@ -52,18 +53,22 @@ public class OpeningFrame extends JFrame {//꾸미기
 
         //제목
         titleLabel = new JLabel("NutriLog");
-        titleLabel.setFont(new Font("Bauhaus 93",Font.PLAIN,100));
+        titleLabel.setFont(new Font("Bauhaus 93",Font.PLAIN,200));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setBounds(200, 30, 500, 200);
 
         //로그인 버튼
         startBtn = new JButton("Start");
-        startBtn.setPreferredSize(new Dimension(120,40));
         startBtn.setBackground(Color.WHITE);
         startBtn.setForeground(Color.BLACK);
-        startBtn.setFont(new Font("Bauhaus 93",Font.PLAIN,14));
+        startBtn.setFont(new Font("Bauhaus 93",Font.PLAIN,70));
         startBtn.setFocusPainted(false);
         startBtn.setBorderPainted(false);
+        startBtn.setMargin(new Insets(20, 0, 0, 0));
+        startBtn.setVerticalAlignment(SwingConstants.CENTER);
+        startBtn.setHorizontalAlignment(SwingConstants.CENTER);
+        startBtn.setVerticalTextPosition(SwingConstants.CENTER);
+        startBtn.setHorizontalTextPosition(SwingConstants.CENTER);
         startBtn.addActionListener(e -> showLoginPanel());
 
         openPanel.add(titleLabel);
