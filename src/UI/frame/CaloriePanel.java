@@ -1,7 +1,6 @@
 package UI.frame;
 
 import Login.User;
-import cal.food.Food;
 
 import javax.swing.*;
 import java.awt.*;
