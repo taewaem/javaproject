@@ -82,7 +82,12 @@ public class FoodPanel extends JPanel {
 		// 음식 양 입력 필드와 버튼
 		foodAmountField = new JTextField(5);
 		JButton calculateButton = new JButton("음식 양 입력");
-
+//		calculateButton.setPreferredSize(new Dimension(120,30));
+//		calculateButton.setBackground(Color.WHITE);
+//		calculateButton.setForeground(Color.BLACK);
+//		calculateButton.setFont(new Font("휴먼둥근헤드라인",Font.PLAIN,12));
+//		calculateButton.setFocusPainted(false);
+//		calculateButton.setBorderPainted(false);
 		// 버튼 클릭 시 소모 칼로리 계산
 		calculateButton.addActionListener(e -> {
 			try {

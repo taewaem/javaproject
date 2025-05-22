@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import Login.UserID;
+import Login.UserList;
+import store.frame.Main;
 
 public class LoginPanel extends JPanel{
 
@@ -12,7 +14,7 @@ public class LoginPanel extends JPanel{
 	private JPasswordField pwField;
     private JButton signInBtn;
     private JButton signUpBtn;
-
+    private UserList userList = new UserList();
     public LoginPanel() {
 
         setBackground(new Color(34,139,34)); //배경색
@@ -33,6 +35,7 @@ public class LoginPanel extends JPanel{
         add(titleLabel);
 
         idField = new JTextField("ID");
+        String id = idField.getText();
         idField.setForeground(Color.GRAY);
         idField.setBackground(Color.WHITE);
         idField.setBorder(null);
@@ -54,6 +57,7 @@ public class LoginPanel extends JPanel{
         add(idField);
 
         pwField = new JPasswordField();
+        String pw = new String(pwField.getPassword());
         pwField.setForeground(Color.GRAY);
         pwField.setBackground(Color.WHITE);
         pwField.setBorder(null);
@@ -86,7 +90,28 @@ public class LoginPanel extends JPanel{
         signInBtn.setFont(new Font("Bauhaus 93",Font.BOLD, 14));
         signInBtn.setFocusPainted(false);
         signInBtn.setBorderPainted(false);
-        //signInBtn.addActionListener(e -> login());
+
+        signInBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String id = idField.getText();
+                String pw = new String(pwField.getPassword());
+
+                if (id.equals("ID") || pw.equals("PW")) {
+                    JOptionPane.showMessageDialog(null, "ID와 비밀번호를 입력하세요.");
+                    return;
+                }
+
+                boolean loginSuccess = userList.login(id, pw);
+                if (loginSuccess) {
+                    SwingUtilities.getWindowAncestor(LoginPanel.this).dispose();
+                    JOptionPane.showMessageDialog(null, id+"님, 환영합니다!");
+                    new MainFrame();
+                } else {
+                    JOptionPane.showMessageDialog(null, "ID 또는 비밀번호가 올바르지 않습니다.");
+                }
+            }
+        });
         add(signInBtn);
 
         //회원가입(Sign Up) 버튼

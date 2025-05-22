@@ -1,5 +1,9 @@
 package UI.frame;
 
+import Login.User;
+import Login.UserID;
+import Login.UserList;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,6 +13,7 @@ public class SignUpFrame extends JFrame{
     private JLabel titleLabel;
     private JPanel signUpPanel;
     private JButton submitBtn;
+    private UserList userList = new UserList();
 
     public SignUpFrame(){
         setTitle("Sign Up");
@@ -45,10 +50,13 @@ public class SignUpFrame extends JFrame{
         signUpPanel.add(Box.createVerticalStrut(30));
 
         //idField,pwField,pw2Field,nicknameField,birthdayField,phoneField
-        String[] fieldTxt = {"아이디 입력", "비밀번호 입력", "비밀번화 확인", "닉네임 입력", 
-                                "생년월일(ex20010116)", "전화번호 (예: 01047757921)"};
 
-        for(String placeholder : fieldTxt){
+        String[] fieldTxt = {"아이디 입력", "비밀번호 입력", "비밀번화 확인", "닉네임 입력",
+                "생년월일(ex20010116)", "전화번호 (예: 01047757921)"};
+        JTextField[] inputFields = new JTextField[fieldTxt.length];
+
+        for(int i=0; i<fieldTxt.length; i++){
+            String placeholder = fieldTxt[i];
             JTextField tf = new JTextField(placeholder);
             tf.setMaximumSize(new Dimension(200, 100));
             tf.setPreferredSize(new Dimension(200, 35));
@@ -75,12 +83,13 @@ public class SignUpFrame extends JFrame{
                         tf.setForeground(Color.GRAY);
                     }
                 }
+
             });
-
             signUpPanel.add(tf);
-
             //텍스트필드 사이 간격
             signUpPanel.add(Box.createVerticalStrut(20));
+            inputFields[i] = tf;
+
         }
 
         submitBtn = new JButton("회원 가입");
@@ -91,7 +100,58 @@ public class SignUpFrame extends JFrame{
         submitBtn.setFocusPainted(false);
         submitBtn.setBorderPainted(false);
         signUpPanel.add(submitBtn);
-        
+
+        submitBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String id =inputFields[0].getText();
+                String pw1 = inputFields[1].getText();
+                String pw2 = inputFields[2].getText();
+                String nickname = inputFields[3].getText();
+                String birthday = inputFields[4].getText();
+                String phone = inputFields[5].getText();
+
+                System.out.println(id);
+                System.out.println(pw1);
+                if (id.equals("아이디 입력") ||
+                        pw1.equals("비밀번호 입력") ||
+                        pw2.equals("비밀번호 확인") ||
+                        nickname.equals("닉네임 입력") ||
+                        birthday.equals("생년월일(ex20010116)") ||
+                        phone.equals("전화번호 (예: 01047757921)"))
+                {
+                    JOptionPane.showMessageDialog(null, "모든 칸에 입력해주세요.");
+                    return;
+                }
+                if (!pw1.equals(pw2)) {
+                    JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+                    return;
+                }
+                if (!userList.checkNickname(nickname)) {
+                    JOptionPane.showMessageDialog(null, "같은 닉네임이 존재합니다.");
+                    return;
+                }
+                if (birthday.length() != 8) {
+                    JOptionPane.showMessageDialog(null, "생년월일은 8자리 숫자여야 합니다.");
+                    return;
+                }
+                if (phone.length() != 11) {
+                    JOptionPane.showMessageDialog(null, "올바른 전화번호를 입력해주세요.(예시 01047757921)");
+                    return;
+                }
+
+                boolean signup = userList.signup(id, pw1, pw2, nickname, birthday, phone);
+
+                if (signup) {
+                    JOptionPane.showMessageDialog(null, "회원가입 성공");
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null,"이미 존재하는 아이디 입니다");
+
+                }
+            }});
+
         //텍스트필드와 버튼 사이 간격
         signUpPanel.add(Box.createVerticalStrut(30));
 
@@ -102,5 +162,4 @@ public class SignUpFrame extends JFrame{
         setVisible(true);
         SwingUtilities.invokeLater(() -> signUpPanel.requestFocusInWindow());
     }
-
 }

@@ -13,10 +13,10 @@ public class User {
 	public User(){
 
 	}
-	public User(String id, String pw, String nickename, String birthday, String phnumber) {
+	public User(String id, String pw, String nickname, String birthday, String phnumber) {
 		this.id = id;
 		this.pw = pw;
-		this.nickname = nickename;
+		this.nickname = nickname;
 		this.birthday = birthday;
 		this.phnumber = phnumber;
 

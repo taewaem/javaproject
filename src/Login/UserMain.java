@@ -245,15 +245,16 @@ public class UserMain extends JPanel {
         revalidate();
         repaint();
     }
-    //메인 테스트
-    // public static void main(String[] args) {
-    //     SwingUtilities.invokeLater(() -> {
-    //         JFrame frame = new JFrame("UserMain 테스트");
-    //         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    //         frame.setSize(1000, 400);
-    //         frame.setLocationRelativeTo(null);
-    //         frame.setContentPane(new UserMain(frame));
-    //         frame.setVisible(true);
-    //     });
-    // }
+
+////    메인 테스트
+//     public static void main(String[] args) {
+//         SwingUtilities.invokeLater(() -> {
+//             JFrame frame = new JFrame("UserMain 테스트");
+//             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//             frame.setSize(1000, 400);
+//             frame.setLocationRelativeTo(null);
+//             frame.setContentPane(new UserMain(frame));
+//             frame.setVisible(true);
+//         });
+//     }
 }
