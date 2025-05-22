@@ -14,7 +14,7 @@ public class UserList {
                 return false;
             }
             User newUser = new User(id, pw, nickname, birthday, phnumber);
-            userList.add(newUser);
+            save(newUser);
             System.out.println("회원 추가됨: " + newUser);
             return true;
 

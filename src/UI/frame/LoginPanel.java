@@ -35,7 +35,6 @@ public class LoginPanel extends JPanel{
         add(titleLabel);
 
         idField = new JTextField("ID");
-        String id = idField.getText();
         idField.setForeground(Color.GRAY);
         idField.setBackground(Color.WHITE);
         idField.setBorder(null);
@@ -57,7 +56,6 @@ public class LoginPanel extends JPanel{
         add(idField);
 
         pwField = new JPasswordField();
-        String pw = new String(pwField.getPassword());
         pwField.setForeground(Color.GRAY);
         pwField.setBackground(Color.WHITE);
         pwField.setBorder(null);

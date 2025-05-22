@@ -1,5 +1,6 @@
 package UI.frame;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,6 +20,7 @@ public class BoardPanel extends JPanel {
     private JButton deleteBtn;
     private Color themeColor = new Color(34, 139, 34);
     private Dimension btnSize = new Dimension(200, 30);
+//    private Board_Main boardMain = new Board_Main();
     
     public BoardPanel() {
 

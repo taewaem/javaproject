@@ -1,7 +1,6 @@
 package store.frame;
 
 import store.cart.Cart;
-import store.frame.CartPanel;
 import store.product.Product;
 import store.product.ProductDescription;
 
@@ -13,10 +12,12 @@ import java.text.DecimalFormat;
 public class ProductPanel extends JPanel {
 
     private JButton cartButton;
+    private JButton storeButton;
     private Cart cart;
     private BackgroundPanel backgroundPanel;
     private DecimalFormat df = new DecimalFormat("###,###");
     private UtilPanel utilPanel = new UtilPanel();
+
 
     public ProductPanel(Product product) {
         cart = new Cart();
@@ -122,12 +123,23 @@ public class ProductPanel extends JPanel {
         buttonPanel.setBackground(new Color(250, 250, 245));
         buttonPanel.setOpaque(false);
 
+        storeButton = new JButton("상점");
+        storeButton.setBackground(new Color(128, 128, 128));
+        storeButton.setForeground(Color.WHITE);
+        storeButton.setFocusPainted(false);
+        storeButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+        storeButton.setPreferredSize(new Dimension(140, 40));
+
+        storeButton.addActionListener(e -> {
+            utilPanel.switchPanel(this, new StorePanel());
+        });
+
         cartButton = new JButton("장바구니 담기");
         cartButton.setBackground(new Color(98, 0, 220));
         cartButton.setForeground(Color.WHITE);
         cartButton.setFocusPainted(false);
         cartButton.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-        cartButton.setPreferredSize(new Dimension(140, 45));
+        cartButton.setPreferredSize(new Dimension(140, 40));
         cartButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
         cartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
@@ -159,6 +171,7 @@ public class ProductPanel extends JPanel {
 //            }
 //        });
 
+        buttonPanel.add(storeButton);
         buttonPanel.add(cartButton);
 
         infoPanel.add(buttonPanel);
