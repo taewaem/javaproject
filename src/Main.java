@@ -9,8 +9,8 @@ public class Main {
         // Shift+F9을(를) 눌러 코드 디버그를 시작합니다. 중단점을 하나 설정해 드렸습니다.
         // 중단점을 더 추가하려면 언제든지 Ctrl+F8을(를) 누르세요
 
-        new MainFrame();
-//        new OpeningFrame();
+//        new MainFrame();
+        new OpeningFrame();
     }
 
 }
