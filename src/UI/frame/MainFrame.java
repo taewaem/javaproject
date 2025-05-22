@@ -14,7 +14,7 @@ public class MainFrame extends JFrame {
 
         setTitle("NutriLog");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(700, 500);
+        setSize(800, 600);
         setLayout(new BorderLayout());
 
         // 내용 화면 영역

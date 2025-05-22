@@ -12,22 +12,19 @@ public class OpeningFrame extends JFrame {//꾸미기
     private JPanel openPanel;
     private JLabel titleLabel;
     private JButton startBtn;
-    private JPanel btnCenterPanel;
 
 
 	public OpeningFrame() {
 		
 		setTitle("NutriLog");
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setSize(500, 300);
+	    setSize(500, 350);
 	    setLocationRelativeTo(null);  // 가운데 정렬
 
 	    cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         
         openPanel = new JPanel(null){
-
-            protected Image backgroundImg = new ImageIcon("src/img/Background.jpg").getImage();
             
             @Override
             public void doLayout() {
@@ -44,10 +41,10 @@ public class OpeningFrame extends JFrame {//꾸미기
                 int titleWidth = fm.stringWidth(titleLabel.getText());
                 int titleHeight = fm.getHeight();
                 int titleX = (panelWidth - titleWidth) / 2;
-                int titleY = y - titleHeight + 50;
+                int titleY = y - titleHeight + 70;
 
                 titleLabel.setBounds(titleX, titleY, titleWidth, titleHeight);
-                startBtn.setBounds(centerX, y + 50, fieldWidth, fieldHeight);
+                startBtn.setBounds(centerX, y + 80, fieldWidth, fieldHeight);
             }
             
         };
@@ -55,7 +52,7 @@ public class OpeningFrame extends JFrame {//꾸미기
 
         //제목
         titleLabel = new JLabel("NutriLog");
-        titleLabel.setFont(new Font("Bauhaus 93",Font.PLAIN,80));
+        titleLabel.setFont(new Font("Bauhaus 93",Font.PLAIN,100));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setBounds(200, 30, 500, 200);
 

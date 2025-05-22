@@ -3,13 +3,15 @@ package UI.frame;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import Login.UserID;
 
 public class LoginPanel extends JPanel{
 
     private JLabel titleLabel;
 	private JTextField idField;
 	private JPasswordField pwField;
-    private JButton loginBtn;
+    private JButton signInBtn;
+    private JButton signUpBtn;
 
     public LoginPanel() {
 
@@ -74,25 +76,28 @@ public class LoginPanel extends JPanel{
                 }
             }
         });
-        pwField.addActionListener(e -> login());
+        //pwField.addActionListener(e -> login());
         add(pwField);
 
-        loginBtn = new JButton("Login");
-        loginBtn.setForeground(Color.BLACK);
-        loginBtn.setBackground(Color.WHITE);
-        loginBtn.setFont(new Font("Bauhaus 93",Font.BOLD, 14));
-        loginBtn.setFocusPainted(false);
-        loginBtn.setBorderPainted(false);
-        // loginBtn.addMouseListener(new MouseAdapter() {
-        //     public void mousePressed(MouseEvent e){
-        //         loginBtn.setBackground(Color.GRAY);
-        //     }
-        //     public void mouseReleased(MouseEvent e){
-        //         loginBtn.setBackground(Color.WHITE);
-        //     }
-        // });
-        loginBtn.addActionListener(e -> login());
-        add(loginBtn);
+        // 로그인(Sign In) 버튼
+        signInBtn = new JButton("Sign In");  
+        signInBtn.setForeground(Color.BLACK);
+        signInBtn.setBackground(Color.WHITE);
+        signInBtn.setFont(new Font("Bauhaus 93",Font.BOLD, 14));
+        signInBtn.setFocusPainted(false);
+        signInBtn.setBorderPainted(false);
+        //signInBtn.addActionListener(e -> login());
+        add(signInBtn);
+
+        //회원가입(Sign Up) 버튼
+        signUpBtn = new JButton("Sign Up");
+        signUpBtn.setForeground(Color.BLACK);
+        signUpBtn.setBackground(Color.WHITE);
+        signUpBtn.setFont(new Font("Bauhaus 93",Font.BOLD, 14));
+        signUpBtn.setFocusPainted(false);
+        signUpBtn.setBorderPainted(false);
+        signUpBtn.addActionListener(e -> showSignUpFrame());
+        add(signUpBtn);
     }
 
     
@@ -117,23 +122,35 @@ public class LoginPanel extends JPanel{
         titleLabel.setBounds(titleX, titleY, titleWidth, titleHeight);
         idField.setBounds(centerX, y, fieldWidth, fieldHeight);
         pwField.setBounds(centerX, y + 50, fieldWidth, fieldHeight);
-        loginBtn.setBounds(centerX, y + 100, fieldWidth, fieldHeight);
+
+        //버튼 배치(signInBtn과 signUpBtn 나란히)
+        int btnWidth = 90;
+        int btnHeight = 30;
+        int gap = 20;   //나란히 배치된 버튼 간격
+        int totalBtnWidth = btnWidth * 2 + gap;
+        int btnStartX = (panelWidth - totalBtnWidth) / 2;
+        int btnY = y + 100;
+
+        signInBtn.setBounds(btnStartX, btnY, btnWidth, btnHeight);
+        signUpBtn.setBounds(btnStartX+btnWidth+gap, btnY, btnWidth, btnHeight);
     }
 
-
-
-    private void login() {
-        String id = idField.getText();
-        String pw = new String(pwField.getPassword());
-
-        // 간단한 예제 로그인 조건 (아이디: user / 비번: 1234)
-        if (id.equals("user") && pw.equals("1234")) {
-            JOptionPane.showMessageDialog(this, id+"님, 환영합니다!");
-            SwingUtilities.getWindowAncestor(this).dispose();
-            new MainFrame(); // 메인 패널 열기
-        } else {
-            JOptionPane.showMessageDialog(this, "아이디 또는 비밀번호가 올바르지 않습니다.");
-        }
+    private void showSignUpFrame(){
+        new SignUpFrame();
     }
+
+    // private void login() {
+    //     String id = idField.getText();
+    //     String pw = new String(pwField.getPassword());
+
+    //     // 간단한 예제 로그인 조건 (아이디: user / 비번: 1234)
+    //     if (id.equals("user") && pw.equals("1234")) {
+    //         JOptionPane.showMessageDialog(this, id+"님, 환영합니다!");
+    //         SwingUtilities.getWindowAncestor(this).dispose();
+    //         new MainFrame(); // 메인 패널 열기
+    //     } else {
+    //         JOptionPane.showMessageDialog(this, "아이디 또는 비밀번호가 올바르지 않습니다.");
+    //     }
+    // }
 	
 }

@@ -30,15 +30,15 @@ public class MenuPanel extends JPanel {
 
         GridBagConstraints c = new GridBagConstraints();
 
-        // CaloriePanel 추가(왼쪽)
-        CaloriePanel caloriePanel = new CaloriePanel();
-        caloriePanel.setPreferredSize(new Dimension(180, 180));
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridheight = 3;
-        c.insets = new Insets(0, 0, 0, 40); //오른쪽 여백
-        c.anchor = GridBagConstraints.CENTER;
-        add(caloriePanel, c);
+        // CaloriePanel 추가(왼쪽) -- 메뉴페널 외부로 수정 중
+        // CaloriePanel caloriePanel = new CaloriePanel();
+        // caloriePanel.setPreferredSize(new Dimension(180, 180));
+        // c.gridx = 0;
+        // c.gridy = 0;
+        // c.gridheight = 3;
+        // c.insets = new Insets(0, 0, 0, 40); //오른쪽 여백
+        // c.anchor = GridBagConstraints.CENTER;
+        // add(caloriePanel, c);
 
         //버튼들(오른쪽)
         
@@ -95,11 +95,11 @@ public class MenuPanel extends JPanel {
         }
 
         //버튼 클릭 시 패널 전환
-        dietBtn.addActionListener(e -> centerPanel.showPanel("diet"));
+        dietBtn.addActionListener(e -> centerPanel.showPanel("food"));
         exerciseBtn.addActionListener(e -> centerPanel.showPanel("exercise"));
         boardBtn.addActionListener(e -> centerPanel.showPanel("board"));
-        healthBtn.addActionListener(e -> centerPanel.showPanel("health"));
-        shopBtn.addActionListener(e -> centerPanel.showPanel("shop"));
+        healthBtn.addActionListener(e -> centerPanel.showPanel("check"));
+        shopBtn.addActionListener(e -> centerPanel.showPanel("store"));
     }
 
     @Override
