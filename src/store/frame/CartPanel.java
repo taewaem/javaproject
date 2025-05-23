@@ -5,46 +5,73 @@ import store.cart.CartItem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.List;
 
 public class CartPanel extends JPanel {
 
     private JPanel itemPanel;
     private JLabel totalLabel;
-    private JButton backButton;
     private JButton clearButton;
-
+    private JButton buyButton;
+    private JButton storeButton;
     private Cart cart;
+    private BackgroundPanel backgroundPanel = new BackgroundPanel();
+    private DecimalFormat df = new DecimalFormat("###,###");
     private UtilPanel utilPanel = new UtilPanel();
+
+    private Map<CartItem, JCheckBox> itemCheckBoxes = new HashMap<>();
 
     public CartPanel(Cart cart) {
         this.cart = cart;
+
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
-        // 총 금액 영역
+        // 상단 총 금액
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(Color.WHITE);
         topPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        topPanel.setOpaque(false);
+
         totalLabel = new JLabel();
         totalLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
         totalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         topPanel.add(totalLabel, BorderLayout.EAST);
         add(topPanel, BorderLayout.NORTH);
 
-        // 상품 목록 패널
-        itemPanel = new JPanel();
+        // 아이템 목록
+        itemPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                backgroundPanel.paintBackground(g, this);
+            }
+        };
         itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
         itemPanel.setBackground(Color.WHITE);
+
         JScrollPane scrollPane = new JScrollPane(itemPanel);
         scrollPane.setBorder(null);
+        scrollPane.getViewport().setBackground(Color.WHITE);
         add(scrollPane, BorderLayout.CENTER);
 
-        // 하단 버튼
+        // 하단 버튼 영역
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setOpaque(false);
+
         clearButton = new JButton("전체 삭제");
-        backButton = new JButton("이전");
+        buyButton = new JButton("결제하기");
+
+        buyButton.setBackground(new Color(144, 238, 144));
+        buyButton.setForeground(Color.WHITE);
+        buyButton.setFocusPainted(false);
+        buyButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+        buyButton.setPreferredSize(new Dimension(100, 40));
 
         clearButton.setBackground(new Color(240, 70, 70));
         clearButton.setForeground(Color.WHITE);
@@ -52,28 +79,62 @@ public class CartPanel extends JPanel {
         clearButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
         clearButton.setPreferredSize(new Dimension(100, 40));
 
-        backButton = new JButton("이전");
-        backButton.setBackground(new Color(128, 128, 128));
-        backButton.setForeground(Color.WHITE);
-        backButton.setFocusPainted(false);
-        backButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-        backButton.setPreferredSize(new Dimension(80, 40));
 
-        backButton.addActionListener(e -> utilPanel.goBackPage());
-        clearButton.addActionListener(e -> {
-            cart.clear(); // 전체 삭제
+        storeButton = new JButton("상점");
+        storeButton.setBackground(new Color(128, 128, 128));
+        storeButton.setForeground(Color.WHITE);
+        storeButton.setFocusPainted(false);
+        storeButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+        storeButton.setPreferredSize(new Dimension(100, 40));
+
+        storeButton.addActionListener(e -> {
+            utilPanel.switchPanel(this, new StorePanel());
+        });
+
+        buyButton.addActionListener(e -> {
+            List<CartItem> selectedItems = new ArrayList<>();
+            for (Map.Entry<CartItem, JCheckBox> entry : itemCheckBoxes.entrySet()) {
+                if (entry.getValue().isSelected()) {
+                    selectedItems.add(entry.getKey());
+                }
+            }
+
+            if (selectedItems.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "선택된 항목이 없습니다.");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, " 구매 완료!");
+            for (CartItem item : selectedItems) {
+                cart.removeItem(item.getProduct());
+            }
+
             refreshCartView();
         });
 
+        clearButton.addActionListener(e -> {
+            cart.clear();
+            refreshCartView();
+        });
+
+        buttonPanel.add(storeButton);
+        buttonPanel.add(buyButton);
         buttonPanel.add(clearButton);
-        buttonPanel.add(backButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
         refreshCartView();
     }
 
     private void refreshCartView() {
+        // 기존 체크 상태 저장
+        Map<CartItem, Boolean> checkedStates = new HashMap<>();
+        for (Map.Entry<CartItem, JCheckBox> entry : itemCheckBoxes.entrySet()) {
+            checkedStates.put(entry.getKey(), entry.getValue().isSelected());
+        }
+
         itemPanel.removeAll();
+        itemPanel.setOpaque(false);
+        itemCheckBoxes.clear();
 
         for (CartItem item : cart.getItems()) {
             JPanel card = new JPanel(new BorderLayout());
@@ -84,7 +145,24 @@ public class CartPanel extends JPanel {
             ));
             card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 130));
 
-            // 왼쪽: 이미지
+            // 왼쪽: 체크박스 + 이미지
+            JPanel leftPanel = new JPanel();
+            leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.X_AXIS));
+            leftPanel.setBackground(Color.WHITE);
+
+            JCheckBox selectCheckBox = new JCheckBox();
+            selectCheckBox.setBackground(Color.WHITE);
+
+            // 이전 체크 상태 유지
+            Boolean wasSelected = checkedStates.get(item);
+            selectCheckBox.setSelected(wasSelected != null && wasSelected);
+
+            selectCheckBox.addItemListener(e -> {
+                if (e.getStateChange() == ItemEvent.SELECTED || e.getStateChange() == ItemEvent.DESELECTED) {
+                    updateSelectedTotal();
+                }
+            });
+
             JLabel imageLabel = new JLabel();
             URL imageUrl = getClass().getResource("/store/image/" + item.getProduct().getName() + ".png");
             if (imageUrl != null) {
@@ -93,9 +171,15 @@ public class CartPanel extends JPanel {
                 Image scaled = img.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 imageLabel.setIcon(new ImageIcon(scaled));
             }
-            card.add(imageLabel, BorderLayout.WEST);
 
-            // 가운데: 정보 및 수량 조절
+            leftPanel.add(selectCheckBox);
+            leftPanel.add(Box.createHorizontalStrut(10));
+            leftPanel.add(imageLabel);
+            card.add(leftPanel, BorderLayout.WEST);
+
+            itemCheckBoxes.put(item, selectCheckBox);
+
+            // 가운데: 상품 정보 + 수량 조절
             JPanel infoPanel = new JPanel();
             infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
             infoPanel.setBackground(Color.WHITE);
@@ -105,26 +189,23 @@ public class CartPanel extends JPanel {
             nameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 
             int price = item.getProduct().getPrice();
-            String formatPrice = MainFrame.df.format(price);
-            JLabel priceLabel = new JLabel(formatPrice + "원" );
+            String formatPrice = df.format(price);
+            JLabel priceLabel = new JLabel(formatPrice + "원");
             priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
             priceLabel.setForeground(new Color(108, 0, 255));
 
-            int totalPrice = item.getProduct().getPrice() * item.getQuantity();
-            String formatTotalPrice = MainFrame.df.format(totalPrice);
-            JLabel totalPriceLabel = new JLabel("총 금액: " + formatTotalPrice  + "원");
+            int totalPrice = price * item.getQuantity();
+            String formatTotalPrice = df.format(totalPrice);
+            JLabel totalPriceLabel = new JLabel("총 금액: " + formatTotalPrice + "원");
             totalPriceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
             totalPriceLabel.setForeground(new Color(108, 0, 255));
 
-
-            // 수량 스피너
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(item.getQuantity(), 1, 99, 1);
             JSpinner quantitySpinner = new JSpinner(spinnerModel);
             quantitySpinner.setPreferredSize(new Dimension(60, 25));
             quantitySpinner.addChangeListener(e -> {
-                int newQuantity = (int) quantitySpinner.getValue();
-                item.setQuantity(newQuantity);
-                refreshCartView();
+                item.setQuantity((int) quantitySpinner.getValue());
+                refreshCartView(); // 체크 상태가 유지되도록 위에서 저장하고 복원
             });
 
             JPanel quantityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -155,6 +236,7 @@ public class CartPanel extends JPanel {
             JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             rightPanel.setBackground(Color.WHITE);
             rightPanel.add(deleteBtn);
+            rightPanel.add(Box.createHorizontalStrut(5));
 
             card.add(infoPanel, BorderLayout.CENTER);
             card.add(rightPanel, BorderLayout.EAST);
@@ -163,11 +245,28 @@ public class CartPanel extends JPanel {
             itemPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
-        int cartTotalPrice = cart.getTotalPrice();
-        String formatCartTotalPrice = MainFrame.df.format(cartTotalPrice);
-        totalLabel.setText("총 금액: " + formatCartTotalPrice + "원");
+        updateSelectedTotal();
 
         revalidate();
         repaint();
+    }
+
+
+    private void updateSelectedTotal() {
+        int selectedTotal = 0;
+        for (Map.Entry<CartItem, JCheckBox> entry : itemCheckBoxes.entrySet()) {
+            if (entry.getValue().isSelected()) {
+                CartItem item = entry.getKey();
+                selectedTotal += item.getProduct().getPrice() * item.getQuantity();
+            }
+        }
+        String formatSelectedTotal = df.format(selectedTotal);
+        totalLabel.setText("선택 항목 총 금액: " + formatSelectedTotal + "원");
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        backgroundPanel.paintBackground(g, this);
     }
 }
