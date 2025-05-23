@@ -1,5 +1,7 @@
 package store.frame;
 
+import UI.frame.CenterPanel;
+import check.CheckPanel;
 import store.cart.Cart;
 import store.product.Product;
 import store.product.ProductDescription;
@@ -13,6 +15,7 @@ public class ProductPanel extends JPanel {
 
     private JButton cartButton;
     private JButton storeButton;
+    private JButton checkButton;
     private Cart cart;
     private BackgroundPanel backgroundPanel;
     private DecimalFormat df = new DecimalFormat("###,###");
@@ -123,12 +126,24 @@ public class ProductPanel extends JPanel {
         buttonPanel.setBackground(new Color(250, 250, 245));
         buttonPanel.setOpaque(false);
 
+        checkButton = new JButton("상태");
+        checkButton.setBackground(new Color(128, 128, 128));
+        checkButton.setForeground(Color.WHITE);
+        checkButton.setFocusPainted(false);
+        checkButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+        checkButton.setPreferredSize(new Dimension(100, 40));
+
+        checkButton.addActionListener(e -> {
+            utilPanel.switchPanel(this, new CheckPanel());
+        });
+
+
         storeButton = new JButton("상점");
         storeButton.setBackground(new Color(128, 128, 128));
         storeButton.setForeground(Color.WHITE);
         storeButton.setFocusPainted(false);
-        storeButton.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-        storeButton.setPreferredSize(new Dimension(140, 40));
+        storeButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+        storeButton.setPreferredSize(new Dimension(100, 40));
 
         storeButton.addActionListener(e -> {
             utilPanel.switchPanel(this, new StorePanel());
@@ -138,9 +153,9 @@ public class ProductPanel extends JPanel {
         cartButton.setBackground(new Color(98, 0, 220));
         cartButton.setForeground(Color.WHITE);
         cartButton.setFocusPainted(false);
-        cartButton.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+        cartButton.setFont(new Font("맑은 고딕", Font.BOLD, 15));
         cartButton.setPreferredSize(new Dimension(140, 40));
-        cartButton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
+        cartButton.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         cartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         // 호버 효과 (간단히)
@@ -171,6 +186,7 @@ public class ProductPanel extends JPanel {
 //            }
 //        });
 
+        buttonPanel.add(checkButton);
         buttonPanel.add(storeButton);
         buttonPanel.add(cartButton);
 
