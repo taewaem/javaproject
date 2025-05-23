@@ -66,8 +66,8 @@ public class FoodPanel extends JPanel {
 		infoPanel.setLayout(new BorderLayout());
 		infoPanel.setOpaque(false);
 		// 음식 정보를 표시할 JLabel
-		foodInfoLabel = new JLabel("<html><h2>음식을 선택하세요!</h2><br><h3>칼로리: 0 Kcal</h3></html>");
-		foodInfoLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+		foodInfoLabel = new JLabel("<html><h1>음식을 선택하세요!</h1><br><h1>칼로리: 0 Kcal</h1></html>");
+		foodInfoLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		foodInfoLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		// 음식 이미지 표시용 JLabel
@@ -99,7 +99,7 @@ public class FoodPanel extends JPanel {
 
 				totalCalories += thisFoodkcal * amount;
 				System.out.println("총 섭취한 칼로리: " + totalCalories);
-				user.setTotalFoodKcal(totalCalories);
+				user.setTotalFoodKcal(user.getTotalFoodKcal() + totalCalories);
 
 				JOptionPane.showMessageDialog(this, thisFoodName + "을 " + amount + "인분 먹었을 때\n섭취한 칼로리: " + thisFoodkcal * amount + " Kcal");
 			} catch (NumberFormatException ex) {

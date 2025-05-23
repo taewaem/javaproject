@@ -59,7 +59,7 @@ public class ExercisePanel extends JPanel {
 		infoPanel.setLayout(new BorderLayout()); // 정보는 가로로 표시
 		infoPanel.setOpaque(false);
 		// 운동 정보를 띄울 JLabel
-		exerciseInfoLabel = new JLabel("<html><h2>운동을 선택하세요!</h2><br><h3>분당 소모 칼로리: 0 Kcal</h3></html>");
+		exerciseInfoLabel = new JLabel("<html><h>운동을 선택하세요!</h><br><h2>분당 소모 칼로리: 0 Kcal</h2></html>");
 		exerciseInfoLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 		exerciseInfoLabel.setHorizontalAlignment(JLabel.CENTER); // 가운데 정렬
 
@@ -84,7 +84,7 @@ public class ExercisePanel extends JPanel {
 
 				totalCalories += thisExerkcal * timeInMinutes;
 				System.out.println("총 소모된 칼로리: " + totalCalories);
-				user.setTotalExerKcal(totalCalories);
+				user.setTotalExerKcal(user.getTotalExerKcal() + totalCalories);
 
 				// 시간에 따른 칼로리 소모 계산
 				JOptionPane.showMessageDialog(this, thisExerName + " 운동을 " + timeInMinutes + "분 동안 했을 때\n소모된 칼로리: " + thisExerkcal * timeInMinutes + " Kcal");

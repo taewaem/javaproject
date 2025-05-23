@@ -8,7 +8,7 @@ public class UserMain extends JPanel {
 
     private JFrame frame; // 프레임 
 
-    public UserMain(JFrame frame) { 
+    public UserMain(JFrame frame) {
         this.frame = frame;
         setLayout(new BorderLayout());
         showLoginPanel();
@@ -88,7 +88,7 @@ public class UserMain extends JPanel {
 
         add(panel, BorderLayout.CENTER);
 
-        submitBtn.addActionListener(e -> { 
+        submitBtn.addActionListener(e -> {
             String id = idField.getText().trim();
             String pw1 = new String(pwField.getPassword());
             String pw2 = new String(pw2Field.getPassword());
@@ -118,7 +118,7 @@ public class UserMain extends JPanel {
                 return;
             }
             if (phone.length() != 11) {
-                JOptionPane.showMessageDialog(frame, "올바른 전화번호를 입력해주세요.(예시 01047757921)");
+                JOptionPane.showMessageDialog(frame, "올바른 전화번호를 입력해주세요(ex:01047757921)");
                 return;
             }
 
@@ -221,7 +221,7 @@ public class UserMain extends JPanel {
 
         add(panel, BorderLayout.CENTER);
 
-        submitBtn.addActionListener(e -> { 
+        submitBtn.addActionListener(e -> {
             String id = idField.getText().trim();
             String phone = phoneField.getText().trim();
             String newPw1 = new String(newPwField1.getPassword());

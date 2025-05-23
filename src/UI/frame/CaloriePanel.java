@@ -21,11 +21,20 @@ public class CaloriePanel extends JPanel {
         setBackground(new Color(0,0,0,0));
 
         intakeLabel = new JLabel("섭취: " + String.format("%.1f",user.getTotalFoodKcal()) + " kcal", SwingConstants.CENTER);
-        intakeLabel.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,17));
+        intakeLabel.setForeground(Color.RED);
+        intakeLabel.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,20));
         burnedLabel = new JLabel("소모: " + String.format("%.1f", user.getTotalExerKcal()) + " kcal", SwingConstants.CENTER);
-        burnedLabel.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,17));
+        burnedLabel.setForeground(Color.BLUE);
+        burnedLabel.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,20));
         totalLabel = new JLabel("잔여: " + String.format("%.1f", (user.getTotalFoodKcal() - user.getTotalExerKcal())) + " kcal", SwingConstants.CENTER);
-        totalLabel.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,17));
+        if((user.getTotalFoodKcal() - user.getTotalExerKcal())>0){
+            totalLabel.setForeground(Color.RED);
+        }else if((user.getTotalFoodKcal() - user.getTotalExerKcal())<0){
+            totalLabel.setForeground(Color.BLUE);
+        }else{
+            totalLabel.setForeground(Color.BLACK);
+        }
+        totalLabel.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,20));
 
         System.out.println("총 섭취량: " + String.format("%.1f",user.getTotalFoodKcal()));
         System.out.println("총 소모량: " + String.format("%.1f", user.getTotalExerKcal()));
@@ -36,7 +45,7 @@ public class CaloriePanel extends JPanel {
         add(totalLabel);
 
     }
-//
+
 //    public void updateLabels() {
 //        intakeLabel.setText("섭취: "+foodKcal+ "kcal");
 //        burnedLabel.setText("소모: "+exerKcal+" kcal");

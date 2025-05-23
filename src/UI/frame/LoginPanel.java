@@ -10,8 +10,8 @@ import store.frame.Main;
 public class LoginPanel extends JPanel{
 
     private JLabel titleLabel;
-	private JTextField idField;
-	private JPasswordField pwField;
+    private JTextField idField;
+    private JPasswordField pwField;
     private JButton signInBtn;
     private JButton signUpBtn;
     private UserList userList = new UserList();
@@ -29,12 +29,13 @@ public class LoginPanel extends JPanel{
         });
 
         titleLabel = new JLabel("NutriLog");
-        titleLabel.setFont(new Font("Bauhaus 93",Font.PLAIN,50));
+        titleLabel.setFont(new Font("Bauhaus 93",Font.PLAIN,100));
         titleLabel.setForeground(Color.WHITE);
-        //titleLabel.setBounds(200, 30, 500, 200);
         add(titleLabel);
 
         idField = new JTextField("ID");
+        idField.setFont(new Font("맑은고딕",Font.BOLD,17));
+        String id = idField.getText();
         idField.setForeground(Color.GRAY);
         idField.setBackground(Color.WHITE);
         idField.setBorder(null);
@@ -50,12 +51,14 @@ public class LoginPanel extends JPanel{
                 if (idField.getText().isEmpty()) {
                     idField.setText("ID");
                     idField.setForeground(Color.GRAY);
-                    }
                 }
-            });
+            }
+        });
         add(idField);
 
         pwField = new JPasswordField();
+        String pw = new String(pwField.getPassword());
+        pwField.setFont(new Font("맑은고딕",Font.PLAIN,17));
         pwField.setForeground(Color.GRAY);
         pwField.setBackground(Color.WHITE);
         pwField.setBorder(null);
@@ -78,14 +81,13 @@ public class LoginPanel extends JPanel{
                 }
             }
         });
-        //pwField.addActionListener(e -> login());
         add(pwField);
 
         // 로그인(Sign In) 버튼
-        signInBtn = new JButton("Sign In");  
+        signInBtn = new JButton("Sign In");
         signInBtn.setForeground(Color.BLACK);
         signInBtn.setBackground(Color.WHITE);
-        signInBtn.setFont(new Font("Bauhaus 93",Font.BOLD, 14));
+        signInBtn.setFont(new Font("Bauhaus 93",Font.BOLD, 20));
         signInBtn.setFocusPainted(false);
         signInBtn.setBorderPainted(false);
 
@@ -116,22 +118,22 @@ public class LoginPanel extends JPanel{
         signUpBtn = new JButton("Sign Up");
         signUpBtn.setForeground(Color.BLACK);
         signUpBtn.setBackground(Color.WHITE);
-        signUpBtn.setFont(new Font("Bauhaus 93",Font.BOLD, 14));
+        signUpBtn.setFont(new Font("Bauhaus 93",Font.BOLD, 20));
         signUpBtn.setFocusPainted(false);
         signUpBtn.setBorderPainted(false);
         signUpBtn.addActionListener(e -> showSignUpFrame());
         add(signUpBtn);
     }
 
-    
+
 
     @Override
     public void doLayout() {
         // 패널의 너비와 높이
         int panelWidth = getWidth();
-        int y = 100;  // 시작 y 위치
-        int fieldWidth = 200;
-        int fieldHeight = 30;
+        int y = 150;  // 시작 y 위치
+        int fieldWidth = 250;
+        int fieldHeight = 50;
 
         // 가운데 정렬된 x 좌표 계산
         int centerX = (panelWidth - fieldWidth) / 2;
@@ -140,19 +142,19 @@ public class LoginPanel extends JPanel{
         int titleWidth = fm.stringWidth(titleLabel.getText());
         int titleHeight = fm.getHeight();
         int titleX = (panelWidth - titleWidth) / 2;
-        int titleY = y - titleHeight - 10;
+        int titleY = y - titleHeight - 70;
 
-        titleLabel.setBounds(titleX, titleY, titleWidth, titleHeight);
-        idField.setBounds(centerX, y, fieldWidth, fieldHeight);
-        pwField.setBounds(centerX, y + 50, fieldWidth, fieldHeight);
+        titleLabel.setBounds(titleX, titleY+100, titleWidth, titleHeight);
+        idField.setBounds(centerX, y + 30, fieldWidth, fieldHeight);
+        pwField.setBounds(centerX, y + 100, fieldWidth, fieldHeight);
 
         //버튼 배치(signInBtn과 signUpBtn 나란히)
-        int btnWidth = 90;
-        int btnHeight = 30;
+        int btnWidth = 115;
+        int btnHeight = 50;
         int gap = 20;   //나란히 배치된 버튼 간격
         int totalBtnWidth = btnWidth * 2 + gap;
         int btnStartX = (panelWidth - totalBtnWidth) / 2;
-        int btnY = y + 100;
+        int btnY = y + 170;
 
         signInBtn.setBounds(btnStartX, btnY, btnWidth, btnHeight);
         signUpBtn.setBounds(btnStartX+btnWidth+gap, btnY, btnWidth, btnHeight);
@@ -162,18 +164,4 @@ public class LoginPanel extends JPanel{
         new SignUpFrame();
     }
 
-    // private void login() {
-    //     String id = idField.getText();
-    //     String pw = new String(pwField.getPassword());
-
-    //     // 간단한 예제 로그인 조건 (아이디: user / 비번: 1234)
-    //     if (id.equals("user") && pw.equals("1234")) {
-    //         JOptionPane.showMessageDialog(this, id+"님, 환영합니다!");
-    //         SwingUtilities.getWindowAncestor(this).dispose();
-    //         new MainFrame(); // 메인 패널 열기
-    //     } else {
-    //         JOptionPane.showMessageDialog(this, "아이디 또는 비밀번호가 올바르지 않습니다.");
-    //     }
-    // }
-	
 }
