@@ -118,7 +118,7 @@ public class UserMain extends JPanel {
                 return;
             }
             if (phone.length() != 11) {
-                JOptionPane.showMessageDialog(frame, "올바른 전화번호를 입력해주세요.(예시 01047757921)");
+                JOptionPane.showMessageDialog(frame, "올바른 전화번호를 입력해주세요(ex:01047757921)");
                 return;
             }
 

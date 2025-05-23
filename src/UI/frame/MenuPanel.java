@@ -7,6 +7,8 @@ import store.frame.StorePanel;
 import store.frame.UtilPanel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
@@ -18,8 +20,8 @@ public class MenuPanel extends JPanel {
 
     private Image background;
     private Color themeColor = new Color(34, 139, 34);
-    private Font themeFont = new Font("Bauhaus 93",Font.PLAIN,30);
-    private Dimension btnSize = new Dimension(100, 60);
+    private Font themeFont = new Font("휴먼둥근헤드라인",Font.PLAIN,40);
+    private Dimension btnSize = new Dimension(120, 80);
     private UtilPanel utilPanel = new UtilPanel();
 
     public MenuPanel(CenterPanel centerPanel) {
@@ -37,9 +39,9 @@ public class MenuPanel extends JPanel {
 
         GridBagConstraints c = new GridBagConstraints();
 
-//         CaloriePanel 추가(왼쪽) -- 메뉴페널 외부로 수정 중
+        //CaloriePanel 추가(왼쪽) -- 메뉴페널 외부로 수정 중
          CaloriePanel caloriePanel = new CaloriePanel();
-         caloriePanel.setPreferredSize(new Dimension(180, 180));
+         caloriePanel.setPreferredSize(new Dimension(250, 250));
          c.gridx = 0;
          c.gridy = 0;
          c.gridheight = 3;
@@ -49,8 +51,9 @@ public class MenuPanel extends JPanel {
 
         //버튼들(오른쪽)
         
-        JButton dietBtn = new JButton("D");
+        JButton dietBtn = new JButton("식단");
         dietBtn.setFont(themeFont);
+        dietBtn.setBorder(BorderFactory.createLineBorder(themeColor, 3));
         dietBtn.setPreferredSize(btnSize);
         c.gridx = 1;
         c.gridy = 0;
@@ -59,7 +62,7 @@ public class MenuPanel extends JPanel {
         c.insets = new Insets(0, 0, 10, 10);
         add(dietBtn, c);
 
-        JButton exerciseBtn = new JButton("E");
+        JButton exerciseBtn = new JButton("운동");
         exerciseBtn.setFont(themeFont);
         exerciseBtn.setPreferredSize(btnSize);
         c.gridx = 2;
@@ -67,7 +70,7 @@ public class MenuPanel extends JPanel {
         c.insets = new Insets(0, 0, 10, 0);
         add(exerciseBtn, c);
 
-        JButton healthBtn = new JButton("H");
+        JButton healthBtn = new JButton("상태");
         healthBtn.setFont(themeFont);
         healthBtn.setPreferredSize(btnSize);
         c.gridx = 1;
@@ -75,7 +78,7 @@ public class MenuPanel extends JPanel {
         c.insets = new Insets(0, 0, 10, 10);
         add(healthBtn, c);
 
-        JButton boardBtn = new JButton("B");
+        JButton boardBtn = new JButton("기록");
         boardBtn.setFont(themeFont);
         boardBtn.setPreferredSize(btnSize);
         c.gridx = 2;
@@ -83,7 +86,7 @@ public class MenuPanel extends JPanel {
         c.insets = new Insets(0, 0, 10, 0);
         add(boardBtn, c);
 
-        JButton shopBtn = new JButton("S");
+        JButton shopBtn = new JButton("상점");
         shopBtn.setFont(themeFont);
         shopBtn.setPreferredSize(btnSize);
         c.gridx = 1;
@@ -98,7 +101,7 @@ public class MenuPanel extends JPanel {
             btn.setBackground(Color.WHITE);
             btn.setForeground(Color.BLACK);
             btn.setFocusPainted(false);
-            btn.setBorderPainted(false);
+            btn.setBorder(BorderFactory.createLineBorder(themeColor, 3));
         }
 
 //        //버튼 클릭 시 패널 전환

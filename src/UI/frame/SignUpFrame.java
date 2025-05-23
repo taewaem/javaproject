@@ -40,7 +40,7 @@ public class SignUpFrame extends JFrame{
 
         //타이틀 라벨
         titleLabel = new JLabel("회원가입 정보 입력");
-        titleLabel.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,35));
+        titleLabel.setFont(new Font("맑은고딕",Font.BOLD,35));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         signUpPanel.add(titleLabel);
@@ -110,7 +110,7 @@ public class SignUpFrame extends JFrame{
         }
         tf.setMaximumSize(new Dimension(320, 100));
         tf.setPreferredSize(new Dimension(320, 50));
-        tf.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,20));
+        tf.setFont(new Font("맑은고딕",Font.BOLD,20));
         tf.setBorder(null);
         tf.setForeground(Color.GRAY);
         tf.setBackground(Color.WHITE);
@@ -125,7 +125,7 @@ public class SignUpFrame extends JFrame{
         }
 
         submitBtn = new JButton("회원 가입");
-        submitBtn.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,30));
+        submitBtn.setFont(new Font("맑은고딕",Font.BOLD,30));
         submitBtn.setPreferredSize(new Dimension(150, 60));
         submitBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         submitBtn.setBackground(Color.WHITE);

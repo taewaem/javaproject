@@ -32,7 +32,7 @@ public class CheckPanel extends JPanel {
         add(centerPanel, BorderLayout.CENTER);
 
         JLabel checkLabel = new JLabel("어떤 부분을 개선하고 싶으세요?");
-        checkLabel.setFont(new Font("NanumSquareRound", Font.BOLD, 18));
+        checkLabel.setFont(new Font("맑은고딕", Font.BOLD, 20));
         checkLabel.setForeground(new Color(110, 50, 220));
         checkLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         checkLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
@@ -88,7 +88,7 @@ public class CheckPanel extends JPanel {
 
             // 건강 상태명 라벨
             JLabel nameLabel = new JLabel(check.getName(), SwingConstants.CENTER);
-            nameLabel.setFont(new Font("NanumSquareRound", Font.BOLD, 14));
+            nameLabel.setFont(new Font("맑은고딕", Font.BOLD, 20));
             nameLabel.setForeground(new Color(90, 40, 180));
             nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             nameLabel.setBorder(BorderFactory.createEmptyBorder(8, 0, 0, 0));

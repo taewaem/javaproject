@@ -34,7 +34,7 @@ public class LoginPanel extends JPanel{
         add(titleLabel);
 
         idField = new JTextField("ID");
-        idField.setFont(new Font("휴먼둥근헤드라인",Font.BOLD,17));
+        idField.setFont(new Font("맑은고딕",Font.BOLD,17));
         String id = idField.getText();
         idField.setForeground(Color.GRAY);
         idField.setBackground(Color.WHITE);
@@ -58,7 +58,7 @@ public class LoginPanel extends JPanel{
 
         pwField = new JPasswordField();
         String pw = new String(pwField.getPassword());
-        pwField.setFont(new Font("휴먼둥근헤드라인",Font.PLAIN,17));
+        pwField.setFont(new Font("맑은고딕",Font.PLAIN,17));
         pwField.setForeground(Color.GRAY);
         pwField.setBackground(Color.WHITE);
         pwField.setBorder(null);
