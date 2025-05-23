@@ -15,6 +15,7 @@ public class CenterPanel extends JPanel {
     private CardLayout cardLayout;
     private JPanel cardPanel;
     public static Cart cart = new Cart();
+    public static CenterPanel ctpanel;
 
     public CenterPanel() {
         cardLayout = new CardLayout();

@@ -65,7 +65,7 @@ public class CartPanel extends JPanel {
         buttonPanel.setOpaque(false);
 
         clearButton = new JButton("전체 삭제");
-        buyButton = new JButton("구입하기");
+        buyButton = new JButton("결제하기");
 
         buyButton.setBackground(new Color(144, 238, 144));
         buyButton.setForeground(Color.WHITE);
@@ -80,7 +80,7 @@ public class CartPanel extends JPanel {
         clearButton.setPreferredSize(new Dimension(100, 40));
 
 
-        storeButton = new JButton("상점으로");
+        storeButton = new JButton("상점");
         storeButton.setBackground(new Color(128, 128, 128));
         storeButton.setForeground(Color.WHITE);
         storeButton.setFocusPainted(false);
@@ -126,6 +126,12 @@ public class CartPanel extends JPanel {
     }
 
     private void refreshCartView() {
+        // 기존 체크 상태 저장
+        Map<CartItem, Boolean> checkedStates = new HashMap<>();
+        for (Map.Entry<CartItem, JCheckBox> entry : itemCheckBoxes.entrySet()) {
+            checkedStates.put(entry.getKey(), entry.getValue().isSelected());
+        }
+
         itemPanel.removeAll();
         itemPanel.setOpaque(false);
         itemCheckBoxes.clear();
@@ -146,6 +152,11 @@ public class CartPanel extends JPanel {
 
             JCheckBox selectCheckBox = new JCheckBox();
             selectCheckBox.setBackground(Color.WHITE);
+
+            // 이전 체크 상태 유지
+            Boolean wasSelected = checkedStates.get(item);
+            selectCheckBox.setSelected(wasSelected != null && wasSelected);
+
             selectCheckBox.addItemListener(e -> {
                 if (e.getStateChange() == ItemEvent.SELECTED || e.getStateChange() == ItemEvent.DESELECTED) {
                     updateSelectedTotal();
@@ -194,7 +205,7 @@ public class CartPanel extends JPanel {
             quantitySpinner.setPreferredSize(new Dimension(60, 25));
             quantitySpinner.addChangeListener(e -> {
                 item.setQuantity((int) quantitySpinner.getValue());
-                refreshCartView();
+                refreshCartView(); // 체크 상태가 유지되도록 위에서 저장하고 복원
             });
 
             JPanel quantityPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -239,6 +250,7 @@ public class CartPanel extends JPanel {
         revalidate();
         repaint();
     }
+
 
     private void updateSelectedTotal() {
         int selectedTotal = 0;

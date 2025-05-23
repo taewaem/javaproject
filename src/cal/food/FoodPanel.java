@@ -158,12 +158,12 @@ public class FoodPanel extends JPanel {
 
 				// 음식 정보 및 이미지 업데이트
 
-				foodInfoLabel.setText("<html><h2>" + thisFoodName + "</h2><br><h3>칼로리: " + thisFoodkcal + " Kcal</h3></html>");
+				foodInfoLabel.setText("<html><h1>" + thisFoodName + "</h1><br><h2>칼로리: " + thisFoodkcal + " Kcal</h2></html>");
 
 
 				// 음식 이미지 업데이트
 				ImageIcon foodImageIcon = new ImageIcon(getClass().getResource("/cal/Images/" + thisFoodName + ".png"));
-				Image foodImage = foodImageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+				Image foodImage = foodImageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 				foodImageLabel.setIcon(new ImageIcon(foodImage));
 
 
