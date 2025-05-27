@@ -1,140 +1,143 @@
-package frame;
 
-import store.frame.UtilPanel;
+package store.frame;
+
 import store.product.Product;
 import store.product.ProductService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.List;
 
 
-public class StorePanel extends JPanel{
+public class StorePanel extends JPanel {
 
     private ProductService productService = new ProductService();
-
     private List<Product> products = productService.getAllProduct();
-
-    private UtilPanel utilPanel = new UtilPanel();
-    private JTextField searchField;
-    private JPanel cartPanel;
     private JPanel productPanel;
+    private BackgroundPanel backgroundPanel;
+    private DecimalFormat df = new DecimalFormat("###,###");
+    private UtilPanel utilPanel = new UtilPanel();
 
     public StorePanel() {
 
+
+
+//        setBackground(new Color(255, 255, 255));
+//        // 타이틀
+//        JLabel title = new JLabel("영양제 상점", SwingConstants.CENTER);
+//        title.setFont(new Font("NanumSquareRound", Font.BOLD, 28)); // 귀여운 둥근 폰트
+//        title.setForeground(new Color(140, 80, 255));  // 밝은 보라색
+//        title.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
+//        add(title, BorderLayout.NORTH);
+
+        backgroundPanel = new BackgroundPanel();
+
         setLayout(new BorderLayout());
-
-        /**
-         * 상단 컨테이너
-         */
-        JLabel title = new JLabel("Store", SwingConstants.CENTER);
-        title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-        add(title, BorderLayout.NORTH);
-
-
-        /**
-         * 중앙 컨테이너
-         * 영양제 목록
-         */
+        setOpaque(false);
+        // 중앙 패널 (영양제 목록)
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.setOpaque(false); // 투명하게
         add(centerPanel, BorderLayout.CENTER);
 
-        //영양제 구현
-        JLabel productLabel = new JLabel("영양제");
-        productLabel.setFont(new Font("맑은 고딕", Font.BOLD, 14));
-        productLabel.setAlignmentX(Component.CENTER_ALIGNMENT);               //가운데로 정렬
+        JLabel productLabel = new JLabel("🛒 영양제 목록 🛒");
+        productLabel.setFont(new Font("NanumSquareRound", Font.BOLD, 18));
+        productLabel.setForeground(new Color(110, 50, 220)); // 진한 보라
+        productLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        productLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         centerPanel.add(productLabel);
-        productPanel = new JPanel(new GridLayout(2, 5, 5, 5));
-        addProductItems();  // 영양제 항목 추가
+
+        productPanel = new JPanel(new GridLayout(2, 5, 10, 10));
+        productPanel.setOpaque(false);
+        addProductItems();
         centerPanel.add(productPanel);
 
         setVisible(true);
     }
 
-
-    //영양제 목록 추가
     private void addProductItems() {
+        productPanel.removeAll();
 
         for (Product product : products) {
 
-            JPanel sp = new JPanel();
-            sp.setSize(new Dimension(170, 170));
+            JPanel itemPanel = new JPanel();
+            itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS));
+            itemPanel.setPreferredSize(new Dimension(140, 170));
+            itemPanel.setOpaque(false);
+            itemPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-            //이미지 불러오기
+            // 이미지 버튼
             URL imageUrl = getClass().getResource("/store/image/" + product.getName() + ".png");
+            JButton btn;
             if (imageUrl != null) {
                 ImageIcon img = new ImageIcon(imageUrl);
-                Image scaled = img.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-
-                // 버튼 생성
-                JButton btn = new JButton(new ImageIcon(scaled));
-                btn.setBorderPainted(false);
-                btn.setContentAreaFilled(false);
-                btn.setPreferredSize(new Dimension(100, 100));
-                btn.addActionListener(e -> showProductDetail(product.getName()));
-
-                // 텍스트 라벨 생성
-                JLabel label = new JLabel(product.getName(), SwingConstants.LEFT);
-                label.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-
-                //가격 라벨 생성
-                int price = product.getPrice();
-                String formatPrice = frame.MainFrame.df.format(price);
-                JLabel priceLabel = new JLabel(formatPrice + "원", SwingConstants.LEFT);
-                priceLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-                priceLabel.setForeground(new Color(108, 0, 255));
-
-
-                // 버튼 + 라벨 + 가격을 담을 panel 생성
-                JPanel itemPanel = new JPanel();
-                itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.Y_AXIS)); // 세로 정렬
-                itemPanel.setPreferredSize(new Dimension(120, 100));
-                itemPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-                itemPanel.setOpaque(false); // 배경 투명
-
-                btn.setAlignmentX(Component.CENTER_ALIGNMENT);
-                label.setAlignmentX(Component.CENTER_ALIGNMENT);
-                priceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-                itemPanel.add(btn);
-                itemPanel.add(label);
-                itemPanel.add(priceLabel);
-
-                productPanel.add(itemPanel);
-
+                Image scaled = img.getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH);
+                btn = new JButton(new ImageIcon(scaled));
+            } else {
+                btn = new JButton("이미지 없음");
             }
-            else {
-                System.out.println("image doesn't exist");
-            }
+            btn.setBorderPainted(false);
+            btn.setContentAreaFilled(false);
+            btn.setFocusPainted(false);
+            btn.setAlignmentX(Component.CENTER_ALIGNMENT);
+            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            // 마우스 오버 효과 (입체감)
+            btn.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    btn.setBorder(BorderFactory.createLineBorder(new Color(180, 120, 255), 3, true));
+                    btn.setLocation(btn.getX(), btn.getY() - 3);
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    btn.setBorder(null);
+                    btn.setLocation(btn.getX(), btn.getY() + 3);
+                }
+            });
+
+            btn.addActionListener(e -> showProductDetail(product.getName()));
+
+            // 제품명 라벨
+            JLabel nameLabel = new JLabel(product.getName(), SwingConstants.CENTER);
+            nameLabel.setFont(new Font("NanumSquareRound", Font.BOLD, 14));
+            nameLabel.setForeground(new Color(90, 40, 180));
+            nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            nameLabel.setBorder(BorderFactory.createEmptyBorder(8, 0, 0, 0));
+
+            // 가격 라벨
+            int price = product.getPrice();
+            String formattedPrice = df.format(price) + "원";
+            JLabel priceLabel = new JLabel(formattedPrice, SwingConstants.CENTER);
+            priceLabel.setFont(new Font("NanumSquareRound", Font.BOLD, 13));
+            priceLabel.setForeground(new Color(140, 60, 255)); // 보라톤 유지
+            priceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            priceLabel.setBorder(BorderFactory.createEmptyBorder(4, 0, 0, 0));
+
+            itemPanel.add(btn);
+            itemPanel.add(nameLabel);
+            itemPanel.add(priceLabel);
+
+            productPanel.add(itemPanel);
         }
-    }
 
-
-    private void searchProduct(String query) {
-        if (query.equalsIgnoreCase("비타민C")) {
-            showProductDetail("비타민C");
-        } else {
-
-            //상세페이지로 화면 전환 코드
-
-            JOptionPane.showMessageDialog(this, query + " 해당 상품이 없습니다.");
-        }
+        productPanel.revalidate();
+        productPanel.repaint();
     }
 
     private void showProductDetail(String productName) {
-//        JOptionPane.showMessageDialog(this, productName + " 상세 페이지로 이동합니다.");
         System.out.println("선택된 영양제: " + productName);
         for (Product p : products) {
-            if (!productName.equals(p.getName())) {
-            }
-            else {
-                System.out.println(p.getName() + " page");
-
-                utilPanel.goToPage(new frame.ProductPanel(p));    //ProductPanel로 이동
+            if (productName.equals(p.getName())) {
+                utilPanel.switchPanel(this, new ProductPanel(p));
+                break;
             }
         }
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        backgroundPanel.paintBackground(g, this);
+    }
 }

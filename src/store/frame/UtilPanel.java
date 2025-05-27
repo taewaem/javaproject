@@ -1,25 +1,18 @@
 package store.frame;
 
+
+import UI.frame.CenterPanel;
+import UI.frame.MenuPanel;
+
 import javax.swing.*;
+import java.util.Stack;
 
 public class UtilPanel{
 
-    public void goToPage(JPanel newPage) {
-
-        frame.MainFrame.pageStack.push((JPanel) frame.MainFrame.mainFrame.getContentPane()); // 현재 패널 저장
-        frame.MainFrame.mainFrame.setContentPane(newPage); // 새로운 패널로 전환
-        frame.MainFrame.mainFrame.revalidate();
-        frame.MainFrame.mainFrame.repaint();
+    public void switchPanel(JPanel container, JPanel newPanel) {
+        container.removeAll();             // 기존 컴포넌트 제거
+        container.add(newPanel);          // 새 패널 추가
+        container.revalidate();           // 레이아웃 새로 계산
+        container.repaint();              // 다시 그리기
     }
-
-    public void goBackPage() {
-        if (!frame.MainFrame.pageStack.isEmpty()) {
-            JPanel backPanel = frame.MainFrame.pageStack.pop();
-            frame.MainFrame.mainFrame.setContentPane(backPanel); // 이전 패널로 전환
-            frame.MainFrame.mainFrame.revalidate();
-            frame.MainFrame.mainFrame.repaint();
-
-        }
-    }
-
 }
